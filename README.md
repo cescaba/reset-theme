@@ -91,6 +91,71 @@ El SVG principal está en `assets/images/reset_matcha.svg`. Reemplaza el archivo
 
 ---
 
+## Crear nuevas páginas
+
+WordPress carga las plantillas del tema siguiendo una jerarquía de archivos. Para añadir una nueva página con diseño propio hay dos formas:
+
+### Opción A — Plantilla de página (recomendada)
+
+1. Crea un archivo PHP en la raíz del tema, por ejemplo `page-menu.php`.
+2. Añade este encabezado al principio del archivo:
+
+```php
+<?php
+/*
+ * Template Name: Menú
+ */
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <?php wp_head(); ?>
+</head>
+<body>
+  <!-- Tu contenido aquí -->
+  <?php wp_footer(); ?>
+</body>
+</html>
+```
+
+3. En el panel de WordPress, ve a **Páginas → Añadir nueva**.
+4. En el panel derecho, despliega **Atributos de página → Plantilla** y selecciona **Menú**.
+5. Publica la página.
+
+### Opción B — Plantilla por slug
+
+Si la página se llama exactamente `sobre-nosotros` en WordPress, crea el archivo `page-sobre-nosotros.php` en la raíz del tema. WordPress lo cargará automáticamente sin necesitar configuración en el panel.
+
+### Archivos de plantilla más comunes
+
+| Archivo | Cuándo lo carga WordPress |
+|---|---|
+| `index.php` | Página de inicio (fallback general) |
+| `front-page.php` | Página de inicio estática (si está configurada en *Ajustes → Lectura*) |
+| `page.php` | Cualquier página sin plantilla asignada |
+| `page-{slug}.php` | Página con ese slug específico |
+| `single.php` | Entrada de blog individual |
+| `archive.php` | Listado de entradas / categorías |
+| `404.php` | Página de error 404 |
+
+### Compartir estilos entre páginas
+
+Para no repetir el CSS en cada plantilla, mueve los estilos comunes a un archivo separado y enlázalo desde `functions.php`:
+
+```php
+// En functions.php
+function reset_enqueue_styles() {
+    wp_enqueue_style( 'reset-main', get_template_directory_uri() . '/assets/css/main.css', [], RESET_THEME_VERSION );
+}
+add_action( 'wp_enqueue_scripts', 'reset_enqueue_styles' );
+```
+
+Luego crea el archivo `assets/css/main.css` con los estilos compartidos (variables, tipografías, reset CSS, etc.).
+
+---
+
 ## Publicar una nueva versión
 
 1. Actualiza el número de versión en `functions.php` (constante `RESET_THEME_VERSION`) y en el encabezado de `style.css`.
