@@ -1,0 +1,491 @@
+.rituals-section {
+    width: 100%;
+    background-color: #AFCBDE;
+    padding: 0;
+    overflow: hidden;
+}
+
+.rituals-background-layer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 319px;
+}
+
+.rituals-capsule {
+    background-color: #223E36;
+    width: 61%; 
+    aspect-ratio: 1 / 1;
+    
+
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%; 
+    
+    padding: 60px;
+    text-align: center;
+}
+
+.rituals-content {
+    max-width: 700px;
+    text-align: center;
+    color: #AFCBDE;
+    padding: 40px;
+}
+
+.rituals-subtitle {
+    display: block;
+    font-size: 20px;
+    line-height: 24px;
+    color: #AFCBDE;
+}
+
+.rituals-content h2 {
+    font-size: 80px;
+    line-height: 110px;
+    margin-bottom: 17px;
+    color: #AFCBDE;
+}
+
+.rituals-content p {
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+    color: #AFCBDE;
+}
+
+@media (max-width: 768px) {
+    .rituals-capsule {
+        width: 90%;
+        aspect-ratio: 1 / 1;
+    }
+}
+
+
+
+.story-way-section {
+    width: 100%;
+    background-color: #F6F5F2;
+}
+
+.story-way-grid {
+    display: flex;
+    width: 100%;
+    min-height: 600px;
+}
+
+.way-image {
+    flex: 0 0 52%;
+    position: relative;
+    overflow: hidden;
+    width: calc(52% + 1px);
+    margin-right: -1px;
+}
+
+.way-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transform: scale(1.01);
+}
+
+.way-content-block {
+    flex: 0 0 48%;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    z-index: 2;
+    padding: 100px;
+}
+
+.way-text-container {
+    max-width: 95%;
+}
+
+.way-text-container h2 {
+    font-size: 48px;
+    color: #223E36;
+    margin-bottom: 30px;
+    line-height: 66px;
+}
+
+.way-text-container p {
+    font-size: 24px;
+    color: #223E36;
+    line-height: 29px;
+    margin-bottom: 29px;
+}
+
+.btn-capsule {
+    display: inline-block;
+    background-color: #223E36;
+    color: #F6F5F2;
+    padding: 17px 55px;
+    border-radius: 50px;
+    text-decoration: none;
+    text-transform: lowercase;
+    font-size: 20px;
+    line-height: 24px;
+    transition: all 0.3s ease;
+}
+
+.btn-capsule:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+    .story-way-grid {
+        flex-direction: column;
+    }
+    .way-image, .way-content-block {
+        width: 100%;
+    }
+    .way-image {
+        height: 400px;
+    }
+}
+
+.purpose-section {
+    position: relative;
+    background-color: #F1F1DE;
+    padding: 90px 0;
+    text-align: center;
+    overflow: hidden;
+}
+
+.purpose-bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.purpose-bg-overlay img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    mix-blend-mode: multiply;
+    opacity: 0.7;
+}
+
+.purpose-container {
+    position: relative;
+    z-index: 2;
+    max-width: 1308px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.purpose-header span {
+    display: block;
+    font-size: 20px;
+    text-transform: lowercase;
+    margin-bottom: 28px;
+    line-height: 24px;
+}
+
+.purpose-header h2 {
+    font-size: 40px;
+    color: #223E36;
+    line-height: 55px;
+    margin-bottom: 51px;
+}
+
+.purpose-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.purpose-col {
+    flex: 1;
+}
+
+.purpose-col p {
+    font-size: 24px;
+    color: #223E36;
+    line-height: 29px;
+    text-align: center;
+    width: fit-content;
+}
+.end-col {
+    justify-items: right;
+}
+
+.divider-col {
+    position: relative;
+    border-left: 2px solid #223E36;
+    border-right: 2px solid #223E36;
+    height: 96px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 322px;
+}
+
+/* Ajuste responsive */
+@media (max-width: 768px) {
+    .purpose-grid {
+        flex-direction: column;
+        gap: 40px;
+    }
+    .divider-col {
+        border-left: none;
+        border-right: none;
+        border-top: 1px solid #223E36;
+        border-bottom: 1px solid #223E36;
+        height: auto;
+        padding: 40px 0;
+    }
+}
+
+
+
+.beliefs-section {
+    background-color: #F6F5F2;
+    padding: 86px 0;
+    text-align: center;
+    color: #223E36;
+}
+
+.beliefs-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.beliefs-subtitle {
+    display: block;
+    font-size: 20px;
+    line-height: 24px;
+    margin-bottom: 25px;
+
+}
+
+.beliefs-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.belief-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.belief-icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 18px;
+}
+
+.belief-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.belief-item h3 {
+    font-size: 24px;
+    line-height: 33px;
+    margin-bottom: 16px;
+}
+
+.belief-item p {
+    font-size: 14px;
+    line-height: 17px;
+}
+
+.belief-divider {
+    width: 2px;
+    height: 96px;
+    background-color: #223E36;
+    align-self: center;
+    margin: 0 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .beliefs-grid {
+        flex-direction: column;
+        gap: 60px;
+    }
+    
+    .belief-divider {
+        width: 60px;
+        height: 1px;
+        margin: 0 auto;
+    }
+}
+
+
+.story-dual-section {
+    display: flex;
+    width: 100%;
+    min-height: 50vh;
+    overflow: hidden;
+}
+
+.dual-block {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 72px 67px;
+    color: #F4F1EA;
+    width: calc(50% + 1.5px);
+    margin-right: -1px;
+}
+
+.dual-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.dual-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.dual-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.25);
+}
+
+.dual-content {
+    position: relative;
+    z-index: 2;
+    max-width: 500px;
+}
+
+.dual-label {
+    display: block;
+    font-size: 20px;
+    color: #FFFFFF;
+    text-transform: lowercase;
+    margin-bottom: 16px;
+    line-height: 24px;
+}
+
+.dual-content h2 {
+    font-size: 36px;
+    line-height: 49px;
+    margin-bottom: 49px;
+    font-weight: 400;
+    color: #FFFFFF;
+    max-width: 463px;
+}
+
+.dual-content p {
+    font-size: 20px;
+    line-height: 24px;
+    margin-bottom: 46px;
+    color: #FFFFFF;
+}
+
+.dual-content .btn-capsule {
+    padding: 17px 14px;
+    background-color: #223E36;
+    color: #FFFFFF;
+    
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .story-dual-section {
+        flex-direction: column;
+    }
+    .dual-block {
+        width: 100%;
+        margin-right: 0;
+        min-height: 500px;
+        padding: 60px 40px;
+    }
+}
+
+
+
+.promise-section {
+    background-color: #A9C3D3;
+    padding: 64px 0;
+    text-align: center;
+}
+
+.promise-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.promise-label {
+    display: block;
+    font-size: 20px;
+    line-height: 24px;
+    color: #223E36;
+    margin-bottom: 16px;
+}
+
+.promise-section h2 {
+    font-size: 36px;
+    color: #223E36;
+    line-height: 49px;
+    margin-bottom: 30px;
+    font-weight: 400;
+}
+
+.font-serif-italic {
+    font-style: italic;
+    font-family: inherit;
+}
+
+.promise-action {
+    display: flex;
+    justify-content: center;
+}
+
+.promise-section .btn-capsule {
+    background-color: #223E36;
+    color: #AFCBDE;
+    padding: 18px 45px;
+    border-radius: 100px;
+    font-size: 20px;
+    line-height: 24px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.promise-section .btn-capsule:hover {
+    transform: translateY(-3px);
+    opacity: 0.95;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .promise-section {
+        padding: 80px 0;
+    }
+    
+    .promise-section h2 {
+        font-size: 2.2rem;
+    }
+}

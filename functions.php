@@ -51,6 +51,9 @@ add_action( 'load-themes.php', function() {
 
 function reset_theme_setup() {
     add_theme_support( 'title-tag' );
+    register_nav_menus( array(
+        'menu-1' => 'Cabecera Principal',
+    ) );
 }
 add_action( 'after_setup_theme', 'reset_theme_setup' );
 
@@ -145,7 +148,7 @@ function reset_guardar_registro() {
 add_action( 'wp_ajax_reset_registro',        'reset_guardar_registro' );
 add_action( 'wp_ajax_nopriv_reset_registro', 'reset_guardar_registro' );
 
-// ── Pasar nonce + ajaxurl al front ──────────────────────────────────────────
+// ── Estilos y scripts ─────────────────────────────────────────────────────────
 function reset_enqueue_scripts() {
     wp_add_inline_script( 'jquery-core', '
         var resetAjax = ' . json_encode([
@@ -153,6 +156,53 @@ function reset_enqueue_scripts() {
             'nonce' => wp_create_nonce( 'reset_nonce' ),
         ]) . ';
     ', 'before' );
+
+    $styles = [
+        'reset-fonts'    => 'assets/css/fonts.css',
+        'reset-main'     => 'assets/css/main.css',
+        'reset-header'      => 'assets/css/header.css',
+        'reset-footer'      => 'assets/css/footer.css',
+        'reset-label-bar'=> 'assets/css/label-bar.css',
+        'reset-hero'     => 'assets/css/hero.css',
+        'reset-form'     => 'assets/css/form.css',
+    ];
+
+    foreach ( $styles as $handle => $path ) {
+        $full_path = get_template_directory() . '/' . $path;
+        if ( file_exists( $full_path ) ) {
+            wp_enqueue_style( $handle, get_template_directory_uri() . '/' . $path, [], RESET_THEME_VERSION );
+        }
+    }
+
+    
+    $js_to_enqueue = [];
+
+    if ( is_front_page() ) {
+        $js_to_enqueue['reset-front'] = 'assets/js/front.js';
+    }
+
+    if ( is_page_template( 'page-templates/our-history.php' ) ) {
+        $js_to_enqueue['reset-history'] = 'assets/js/our-history.js';
+    }
+
+    if ( is_page_template( 'page-templates/contact.php' ) ) {
+        $js_to_enqueue['reset-contact'] = 'assets/js/contact.js';
+    }
+
+    foreach ( $js_to_enqueue as $handle => $path ) {
+        $full_path = get_template_directory() . '/' . $path;
+        
+        if ( file_exists( $full_path ) ) {
+            wp_enqueue_script( $handle, get_template_directory_uri() . '/' . $path, ['jquery'], RESET_THEME_VERSION, true );
+
+            if ( $handle === 'reset-front' ) {
+                wp_localize_script( 'reset-front', 'themeData', [
+                    'templateUrl' => get_template_directory_uri()
+                ]);
+            }
+        }
+    }
+
     wp_enqueue_script( 'jquery' );
 }
 add_action( 'wp_enqueue_scripts', 'reset_enqueue_scripts' );
@@ -196,6 +246,17 @@ function reset_export_csv() {
     exit;
 }
 add_action( 'admin_init', 'reset_export_csv' );
+
+function reset_enqueue_page_styles() {
+    if ( is_page_template( 'page-templates/our-story.php' ) ) {
+        wp_enqueue_style( 'our-story-style', get_template_directory_uri() . '/assets/css/pages/our-story.css', [], RESET_THEME_VERSION );
+    }
+
+    if ( is_page_template( 'page-templates/contact.php' ) ) {
+        wp_enqueue_style( 'contact-style', get_template_directory_uri() . '/assets/css/pages/contact.css', [], RESET_THEME_VERSION );
+    }
+}
+add_action( 'wp_enqueue_scripts', 'reset_enqueue_page_styles' );
 
 // ── Página de admin ──────────────────────────────────────────────────────────
 function reset_admin_page() {

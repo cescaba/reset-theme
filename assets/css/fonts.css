@@ -1,0 +1,63 @@
+@font-face {
+  font-family: 'Exposure';
+  src: url('<?php echo get_template_directory_uri(); ?>/fonts/exposure/Exposure-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Exposure';
+  src: url('<?php echo get_template_directory_uri(); ?>/fonts/exposure/Exposure-Italic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Exposure';
+  src: url('<?php echo get_template_directory_uri(); ?>/fonts/exposure/Exposure-Black.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Exposure -10';
+  src: url('<?php echo get_template_directory_uri(); ?>/fonts/exposure/Exposure-Minus10-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ABC Diatype';
+  src: url('<?php echo get_template_directory_uri(); ?>/fonts/abc-diatype/ABCDiatype-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ABC Diatype';
+  src: url('<?php echo get_template_directory_uri(); ?>/fonts/abc-diatype/ABCDiatype-Italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ABC Diatype';
+  src: url('<?php echo get_template_directory_uri(); ?>/fonts/abc-diatype/ABCDiatype-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ABC Diatype';
+  src: url('<?php echo get_template_directory_uri(); ?>/fonts/abc-diatype/ABCDiatype-BoldItalic.woff2') format('woff2');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}

@@ -1,0 +1,159 @@
+.hero {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    color: #ffffff;
+}
+
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+.hero-bg img, 
+.hero-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.hero-text-box {
+    max-width: 542px;
+}
+
+.hero-content-container {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 1446px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+/* --- CASO 1: VIDEO --- */
+.hero-case-1 {
+    background-color: #A9A9A9;
+}
+
+.hero-case-1 .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 2;
+}
+
+.hero-case-1 .hero-title {
+    font-weight: 400;
+    font-size: 109px;
+    line-height: 98px;
+    font-family: 'DM Serif Display', serif;
+}
+
+.hero-case-1 .hero-description {
+    font-size: 20px;
+    line-height: 24px;
+    font-family: 'Fragment Mono', monospace;
+    font-weight: 400;
+    max-width: 260px;
+}
+
+/* --- CASO 2: IMAGEN + DEGRADADO --- */
+.hero-case-2 .hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: linear-gradient(97.48deg, rgba(0, 0, 0, 0.33) 24.09%, rgba(0, 0, 0, 0) 63.33%);
+}
+
+.hero-case-2 .hero-title {
+    font-weight: 400;
+    font-size: 4rem;
+    line-height: 88px;
+    font-family: 'DM Serif Display', serif;
+    margin-bottom: 14px;
+}
+
+.hero-case-2 .hero-description {
+    font-size: 2rem;
+    line-height: 38px;
+    font-family: 'Fragment Mono', monospace;
+    font-weight: 400;
+    margin-bottom: 97px;
+}
+
+.hero-case-2 .hero-divider {
+    width: 56px;
+    height: 2px;
+    background: #F6F5F2;
+    margin-bottom: 6px;
+}
+
+.hero-case-2 .hero-footer-text {
+    font-size: 1rem;
+    line-height: 19px;
+    font-family: 'Fragment Mono', monospace;
+    font-weight: 400;
+}
+
+/* --- CASO 3: SPLIT 40/60 --- */
+.hero-case-3 {
+    background-color: #B2C7D9;
+}
+
+.hero-case-3 .hero-bg {
+    left: 41%;
+    width: 59%;
+}
+
+.hero-case-3 .hero-content-container {
+    padding-left: 40px;
+}
+
+.hero-case-3 .hero-pretitle {
+    display: block;
+    font-size: 24px;
+    line-height: 29px;
+    font-family: 'Fragment Mono', monospace;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+
+.hero-case-3 .hero-title {
+    font-weight: 400;
+    font-size: 80px;
+    line-height: 100%;
+    max-width: 382px;
+    font-family: 'DM Serif Display', serif;
+    margin-bottom: 30px;
+}
+
+.hero-case-3 .hero-description {
+    font-size: 24px;
+    line-height: 29px;
+    font-family: 'Fragment Mono', monospace;
+    font-weight: 400;
+    max-width: 427px;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+    .hero-case-3 {
+        flex-direction: column;
+    }
+    .hero-case-3 .hero-bg, 
+    .hero-case-3 .hero-content-container {
+        width: 100%;
+        left: 0;
+        height: 50%;
+    }
+    .hero-title {
+        font-size: 3rem !important;
+    }
+}
