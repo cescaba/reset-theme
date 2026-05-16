@@ -1,3 +1,10 @@
+<?php
+if ( defined( 'RESET_COMING_SOON_MODE' ) && RESET_COMING_SOON_MODE ) {
+    include get_template_directory() . '/comingsoon.php';
+    return;
+}
+?>
+
 <?php get_header(); ?>
 
 <div class="site-wrapper">
