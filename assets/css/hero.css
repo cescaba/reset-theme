@@ -144,6 +144,19 @@
 
 /* --- RESPONSIVE --- */
 @media (max-width: 768px) {
+
+    .hero-case-1 .hero-title {
+        font-size: 77px;
+        line-height: 73px;
+    }
+
+    .hero-case-1 .hero-description {
+        font-size: 16px;
+        line-height: 19px;
+        
+        max-width: 260px;
+    }
+
     .hero-case-3 {
         flex-direction: column;
     }
@@ -153,7 +166,5 @@
         left: 0;
         height: 50%;
     }
-    .hero-title {
-        font-size: 3rem !important;
-    }
+    
 }

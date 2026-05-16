@@ -4,6 +4,7 @@
 // Para actualizar: sube la nueva versión aquí Y en style.css, luego
 // actualiza también el archivo update.json en tu servidor.
 define( 'RESET_THEME_VERSION', '1.0.1' );
+define( 'RESET_THEME_DB_VERSION', '2.0.0' );
 
 // URL del JSON de actualizaciones — cámbiala por la tuya antes de desplegar.
 // El archivo update.json debe estar accesible públicamente.
@@ -57,6 +58,22 @@ function reset_theme_setup() {
 }
 add_action( 'after_setup_theme', 'reset_theme_setup' );
 
+function reset_inline_svg( $relative_path, $class = '' ) {
+    $file_path = get_template_directory() . '/' . ltrim( $relative_path, '/' );
+
+    if ( ! file_exists( $file_path ) ) {
+        return '';
+    }
+
+    $svg = file_get_contents( $file_path );
+
+    if ( $class !== '' ) {
+        $svg = preg_replace( '/<svg\b/', '<svg class="' . esc_attr( $class ) . '"', $svg, 1 );
+    }
+
+    return $svg;
+}
+
 /*
  * ── Formato del archivo reset-theme.json ────────────────────────────────────
  * Sube este archivo a la URL definida en RESET_THEME_UPDATE_URL.
@@ -83,13 +100,24 @@ function reset_create_table() {
     $table  = $wpdb->prefix . 'reset_registros';
     $charset = $wpdb->get_charset_collate();
 
+    if ( $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table ) ) === $table ) {
+        $has_email_index = $wpdb->get_var( "SHOW INDEX FROM $table WHERE Key_name = 'email'" );
+
+        if ( $has_email_index ) {
+            $wpdb->query( "ALTER TABLE $table DROP INDEX email" );
+        }
+    }
+
     $sql = "CREATE TABLE IF NOT EXISTS $table (
         id         BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
         nombre     VARCHAR(200)    NOT NULL DEFAULT '',
         email      VARCHAR(200)    NOT NULL,
+        category   VARCHAR(100)    NOT NULL DEFAULT '',
+        subject    VARCHAR(255)    NOT NULL DEFAULT '',
+        message    LONGTEXT        NULL,
         fecha      DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
         PRIMARY KEY (id),
-        UNIQUE KEY email (email)
+        KEY email (email)
     ) $charset;";
 
     require_once ABSPATH . 'wp-admin/includes/upgrade.php';
@@ -97,33 +125,47 @@ function reset_create_table() {
 }
 add_action( 'after_switch_theme', 'reset_create_table' );
 
+function reset_maybe_update_schema() {
+    if ( get_option( 'reset_theme_db_version' ) === RESET_THEME_DB_VERSION ) {
+        return;
+    }
+
+    reset_create_table();
+    update_option( 'reset_theme_db_version', RESET_THEME_DB_VERSION );
+}
+add_action( 'after_setup_theme', 'reset_maybe_update_schema' );
+
 // ── AJAX: guardar registro (público) ────────────────────────────────────────
 function reset_guardar_registro() {
     check_ajax_referer( 'reset_nonce', 'nonce' );
 
-    // ── Anti-bot: honeypot ──────────────────────────────────────────────────
-    if ( ! empty( $_POST['website'] ) ) {
-        wp_send_json_error( [ 'msg' => 'Spam detectado.' ], 403 );
-    }
-
-    // ── Anti-bot: timestamp firmado ─────────────────────────────────────────
+    $website = sanitize_text_field( $_POST['website'] ?? '' );
     $form_loaded = (int) ( $_POST['form_loaded'] ?? 0 );
     $form_token  = sanitize_text_field( $_POST['form_token'] ?? '' );
 
-    $token_actual   = wp_hash( floor( time() / 60 )        . 'reset_form' );
-    $token_anterior = wp_hash( floor( ( time() - 60 ) / 60 ) . 'reset_form' );
-
-    if ( $form_token !== $token_actual && $form_token !== $token_anterior ) {
-        wp_send_json_error( [ 'msg' => 'Token inválido.' ], 403 );
+    if ( $website !== '' ) {
+        wp_send_json_error( [ 'msg' => 'Spam detectado.' ], 403 );
     }
 
-    if ( $form_loaded > 0 && time() - $form_loaded < 3 ) {
-        wp_send_json_error( [ 'msg' => 'Envío demasiado rápido.' ], 403 );
+    if ( $form_loaded > 0 && $form_token !== '' ) {
+        $token_actual   = wp_hash( floor( time() / 60 ) . 'reset_form' );
+        $token_anterior = wp_hash( floor( ( time() - 60 ) / 60 ) . 'reset_form' );
+
+        if ( $form_token !== $token_actual && $form_token !== $token_anterior ) {
+            wp_send_json_error( [ 'msg' => 'Token inválido.' ], 403 );
+        }
+
+        if ( time() - $form_loaded < 3 ) {
+            wp_send_json_error( [ 'msg' => 'Envío demasiado rápido.' ], 403 );
+        }
     }
 
     // ── Datos ───────────────────────────────────────────────────────────────
-    $nombre = sanitize_text_field( $_POST['nombre'] ?? '' );
-    $email  = sanitize_email( $_POST['email'] ?? '' );
+    $nombre   = sanitize_text_field( $_POST['nombre'] ?? $_POST['name'] ?? '' );
+    $email    = sanitize_email( $_POST['email'] ?? '' );
+    $category = sanitize_text_field( $_POST['category'] ?? '' );
+    $subject  = sanitize_text_field( $_POST['subject'] ?? '' );
+    $message  = sanitize_textarea_field( $_POST['message'] ?? '' );
 
     if ( ! is_email( $email ) ) {
         wp_send_json_error( [ 'msg' => 'Email no válido.' ], 400 );
@@ -132,15 +174,13 @@ function reset_guardar_registro() {
     global $wpdb;
     $table = $wpdb->prefix . 'reset_registros';
 
-    $existe = $wpdb->get_var( $wpdb->prepare( "SELECT id FROM $table WHERE email = %s", $email ) );
-    if ( $existe ) {
-        wp_send_json_success( [ 'msg' => 'already' ] );
-    }
-
     $wpdb->insert( $table, [
-        'nombre' => $nombre,
-        'email'  => $email,
-        'fecha'  => current_time( 'mysql' ),
+        'nombre'   => $nombre,
+        'email'    => $email,
+        'category' => $category,
+        'subject'  => $subject,
+        'message'  => $message,
+        'fecha'    => current_time( 'mysql' ),
     ] );
 
     wp_send_json_success( [ 'msg' => 'ok' ] );
@@ -231,14 +271,14 @@ function reset_export_csv() {
 
     global $wpdb;
     $table = $wpdb->prefix . 'reset_registros';
-    $rows  = $wpdb->get_results( "SELECT nombre, email, fecha FROM $table ORDER BY fecha DESC", ARRAY_A );
+    $rows  = $wpdb->get_results( "SELECT nombre, email, category, subject, message, fecha FROM $table ORDER BY fecha DESC", ARRAY_A );
 
     header( 'Content-Type: text/csv; charset=utf-8' );
     header( 'Content-Disposition: attachment; filename="reset-registros-' . date('Y-m-d') . '.csv"' );
 
     $out = fopen( 'php://output', 'w' );
     fprintf( $out, chr(0xEF) . chr(0xBB) . chr(0xBF) ); // BOM para Excel
-    fputcsv( $out, [ 'Nombre', 'Email', 'Fecha' ] );
+    fputcsv( $out, [ 'Nombre', 'Email', 'Categoría', 'Asunto', 'Mensaje', 'Fecha' ] );
     foreach ( $rows as $row ) {
         fputcsv( $out, $row );
     }
@@ -292,6 +332,9 @@ function reset_admin_page() {
                     <th style="width:40px;">#</th>
                     <th>Nombre</th>
                     <th>Email</th>
+                    <th>Categoría</th>
+                    <th>Asunto</th>
+                    <th>Mensaje</th>
                     <th>Fecha</th>
                 </tr>
             </thead>
@@ -301,6 +344,9 @@ function reset_admin_page() {
                     <td><?php echo (int) $r->id; ?></td>
                     <td><?php echo esc_html( $r->nombre ); ?></td>
                     <td><?php echo esc_html( $r->email ); ?></td>
+                    <td><?php echo esc_html( $r->category ?? '' ); ?></td>
+                    <td><?php echo esc_html( $r->subject ?? '' ); ?></td>
+                    <td><?php echo esc_html( wp_trim_words( (string) ( $r->message ?? '' ), 12 ) ); ?></td>
                     <td><?php echo esc_html( $r->fecha ); ?></td>
                 </tr>
                 <?php endforeach; ?>

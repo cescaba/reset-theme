@@ -177,9 +177,21 @@ a {
     .info-images-block {
         flex: 0 0 100%;
     }
+    
+}
+
+@media (max-width: 768px) {
+    .info-text-block {
+        flex: 0 0 40%;
+        background-color: #AFCBDE;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 60px 45px;
+    }
     .info-title {
-        font-size: 2.5rem;
-        text-align: center;
+        font-size: 48px;
+        line-height: 100%;
     }
 }
 
@@ -406,6 +418,134 @@ a {
 .product-card p { font-family: 'Fragment Mono', monospace; font-size: 14px; line-height: 17px; font-weight: 400; font-style: italic; max-width: 240px;}
 
 
+@media (max-width: 1024px) {
+    .slider-main {
+        flex-direction: column;
+        padding-left: 20px;
+        padding-right: 20px;
+        gap: 35px;
+    }
+
+    .slider-image-wrapper {
+        flex: 0 0 100%;
+        width: 100%;
+    }
+
+    .slider-text {
+        width: 100%;
+        text-align: left;
+    }
+
+    .slider-text h2 {
+        max-width: 100%;
+        font-size: 42px;
+        line-height: 1.2;
+    }
+
+    /* Ajuste del Grid inferior */
+    .products-grid-container {
+        flex-direction: column;
+        padding-left: 20px;
+        gap: 40px;
+    }
+
+    .product-card {
+        flex: 0 0 45%;
+    }
+}
+
+@media (max-width: 768px) {
+    .products-section {
+        padding:  0;
+        padding-bottom: 106px;
+    }
+
+    .slider-main {
+        margin-bottom: 12px;
+        gap: 21px;
+        padding: 0;
+    }
+
+    .slider-arrow {
+        width: 50px;
+        height: 55px;
+        font-size: 32px;
+    }
+
+    .slider-text {
+        padding-inline: 21px;
+    }
+
+    .slider-text h2 {
+        font-size: 40px;
+        line-height: 55px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .product-detail {
+        margin-bottom: 22px;
+    }
+
+    .product-detail h3 {
+        font-size: 20px;
+        line-height: 24px;
+        margin-bottom: 4px;
+    }
+
+    .product-detail p {
+        font-size: 16px;
+        line-height: 19px;
+    }
+
+    .grid-header {
+        display: none !important;
+    }
+
+    .products-grid-container {
+        padding: 0;
+        width: 100%;
+    }
+
+    .products-scroll-wrapper {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px 3px;
+        
+        overflow-x: visible;
+        overflow-y: visible;
+        width: 100%;
+        padding-right: 0;
+        scroll-snap-type: none;
+    }
+
+    .product-card {
+        flex: none;
+        width: 100%;
+        min-width: 0;
+    }
+
+    .product-img {
+        aspect-ratio: 15 / 14;
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
+    .product-card h4 {
+        padding-left: 12px;
+        font-size: 13px;
+        line-height: 16px;
+        margin-bottom: 5px;
+    }
+
+    .product-card p {
+        padding-left: 12px;
+        font-size: 9px;
+        line-height: 11px;
+        max-width: 92%;
+    }
+}
+
 
 
 .space-section {
@@ -491,16 +631,88 @@ a {
 }
 
 @media (max-width: 1024px) {
+    .space-container {
+        max-width: 80%;
+    }
+
+    .space-content-wrapper {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+    }
+
+    .space-info-card {
+        position: absolute;
+        right: -10%;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 40vw;
+        min-width: 380px;
+        padding: 35px 25px;
+    }
+
+    .space-info-card h2 {
+        font-size: 52px;
+        line-height: 1.2;
+        margin-bottom: 60px;
+    }
+}
+
+@media (max-width: 768px) {
+    .space-section {
+        padding-bottom: 0;
+    }
+
+    .space-container {
+        max-width: 100%;
+        margin: 0;
+    }
+
     .space-content-wrapper {
         width: 100%;
     }
+
+    .view-map-link {
+        display: none !important;
+    }
+
+    .space-image-wrapper img {
+        filter: none;
+        height: 500px;
+        object-fit: cover;
+    }
+
     .space-info-card {
         position: relative;
         right: 0;
         top: 0;
         transform: none;
+        
         width: 100%;
-        margin-top: -40px;
+        min-width: 100%;
+        max-width: 100%;
+        
+        padding: 28px 24px 60px 24px; 
+        box-sizing: border-box;
+    }
+
+    .space-info-card .info-label {
+        font-size: 18px;
+        line-height: 25px;
+    }
+
+    .space-info-card h2 {
+        font-size: 51px;
+        line-height: 51px;
+        margin-bottom: 70px;
+    }
+
+    .address-details {
+        max-width: 100%;
+        font-size: 18px;
+        line-height: 25px;
+        border-bottom: 1px solid #F6F5F2;
     }
 }
 
@@ -558,18 +770,79 @@ a {
 
 /* --- Responsive --- */
 @media (max-width: 1024px) {
-    .rhythm-item {
-        flex: 1 1 50%;
+    .rhythm-grid {
+        display: flex;
+        flex-wrap: wrap;
     }
+
     .rhythm-text-block {
-        flex: 1 1 100%;
-        min-height: 400px;
+        flex: 0 0 100%;
+        width: 100%;
+        padding: 80px 40px;
+        text-align: center;
+    }
+
+    .rhythm-text-content h2 {
+        font-size: 52px;
+    }
+
+    .rhythm-grid .rhythm-image {
+        flex: 0 0 50%;
+        width: calc(50% + 1px);
+        height: 450px;
     }
 }
 
 @media (max-width: 768px) {
+    .rhythm-grid {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
     .rhythm-item {
-        flex: 1 1 100%;
-        min-height: 450px;
+        width: 100%;
+        margin-right: 0;
+        height: auto;
+    }
+
+    .rhythm-text-block {
+        flex: none;
+        padding: 60px 23px;
+        text-align: left;
+        justify-content: left;
+    }
+
+    .rhythm-text-content h2 {
+        font-size: 60px;
+        line-height: 100%;
+        margin-bottom: 18px;
+    }
+
+    .rhythm-text-content p {
+        font-size: 20px;
+        line-height: 24px;
+    }
+
+    .rhythm-img-lifestyle {
+        display: none !important;
+    }
+
+    .rhythm-img-cheers {
+        display: block !important;
+        flex: none;
+        width: 100%;
+        height: 110vw;
+    }
+
+    .rhythm-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .rhythm-grid .rhythm-image {
+        height: 420px;
+        width: 100%;
     }
 }

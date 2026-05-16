@@ -66,7 +66,7 @@
 
 @media (max-width: 768px) {
     .site-footer {
-        padding: 60px 0;
+        padding: 24px 0;
     }
     
     .footer-container {
@@ -76,6 +76,7 @@
     }
     
     .footer-nav {
+        display: none;
         flex-direction: column;
         gap: 20px;
         padding-top: 0;

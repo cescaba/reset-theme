@@ -19,7 +19,7 @@
 
 <section class="rituals-section">
     <div class="rituals-background-layer">
-        <div class="rituals-capsule">
+        <div>
             <div class="rituals-content">
                 <span class="rituals-subtitle font-mono">We don’t serve drinks</span>
                 <h2 class="font-serif">We create rituals</h2>

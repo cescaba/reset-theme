@@ -130,11 +130,11 @@
             </div>
         </div>
 
-        <div class="rhythm-item rhythm-image">
+        <div class="rhythm-item rhythm-image rhythm-img-lifestyle">
             <img src="<?php echo get_template_directory_uri(); ?>/assets/images/sc-rhythm-1.png" alt="Enjoying Reset Matcha">
         </div>
 
-        <div class="rhythm-item rhythm-image">
+        <div class="rhythm-item rhythm-image rhythm-img-cheers">
             <img src="<?php echo get_template_directory_uri(); ?>/assets/images/sc-rhythm-2.png" alt="Sharing Reset Matcha">
         </div>
     </div>

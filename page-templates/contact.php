@@ -12,7 +12,7 @@
     'pretitle'    => '---Let\'s talk',
     'title'       => 'Give us a call.',
     'description' => 'Reservations, collaborations press - or just a hello. We answer fast.',
-    'bg_url'      => get_template_directory_uri() . '/assets/images/bg-page-2.png'
+    'bg_url'      => get_template_directory_uri() . '/assets/images/bg-contact.png'
 ]); ?>
   
 </div>
@@ -62,7 +62,13 @@
             <div class="form-wrapper">
                 <h2 class="font-serif">Send us<br>a message</h2>
 
-                <form action="#" class="reset-form">
+                <form action="#" class="reset-form" id="contactForm">
+                    <div style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden;" aria-hidden="true">
+                        <input type="text" name="website" value="" tabindex="-1" autocomplete="off">
+                    </div>
+                    <input type="hidden" name="form_loaded" value="<?php echo time(); ?>">
+                    <input type="hidden" name="form_token" value="<?php echo wp_hash( floor(time()/60) . 'reset_form' ); ?>">
+
                     <div class="form-categories font-mono">
                         <label><input type="radio" name="category" value="events" checked> <span>events</span></label>
                         <label><input type="radio" name="category" value="press"> <span>press</span></label>
@@ -92,6 +98,9 @@
                         <p class="font-mono privacy-note">By sending you accept our privacy policy</p>
                     </div>
                 </form>
+                <div id="contactSuccessMsg" style="display:none;margin-top:18px;padding:16px 18px;border-left:3px solid currentColor;background:rgba(0,0,0,.04);font-family:inherit;">
+                    Message sent. We’ll get back to you soon.
+                </div>
             </div>
         </div>
     </div>
