@@ -135,7 +135,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      background: var(--ink-blue);
+      background: var(--warm-sand);
     }
 
     .a-eyebrow {
@@ -200,13 +200,28 @@
     .a-btn:hover { background: var(--matcha-light); }
 
     .a-right {
-      position: relative; 
+      position: relative;
       background: var(--warm-sand);
-display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
       padding: 80px 60px;
       overflow: hidden;
+    }
+
+    .a-right-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+
+    .a-right > div {
+      position: relative;
+      z-index: 1;
     }
 
     .a-big-text {
@@ -273,9 +288,9 @@ display: flex;
     @media (max-width: 768px) {
       .nav { padding: 20px 24px; }
       .label-bar { padding: 0 24px; overflow-x: auto; }
-      .a-grid { grid-template-columns: 1fr; min-height: 100vh; min-height: 100dvh; }
+      .a-grid { display: flex; flex-direction: column-reverse; min-height: auto; }
       .a-left { padding: 48px 28px; }
-      .a-right { flex: 1; min-height: 0; padding: 32px 24px; gap: 32px; }
+      .a-right { min-height: 80vh; min-height: 80dvh; flex: 1; padding: 32px 24px; gap: 32px; }
       .a-big-text { flex: 1; align-items: center; }
       .a-big-text img { object-fit: contain; }
     }
@@ -313,9 +328,10 @@ display: flex;
       </div>
     </div>
     <div class="a-right">
-      <div class="a-big-text">
-        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/reset_matcha.svg" alt="(re)set">
-      </div>
+      <video autoplay muted loop playsinline class="a-right-video">
+        <source src="<?php echo get_template_directory_uri(); ?>/assets/images/RESET_video_1.mp4" type="video/mp4">
+        Tu navegador no soporta videos.
+      </video>
       <div class="a-info">
         <div class="a-location">Opening soon</div>
         <div class="a-address">C/ Casanova 189<br>Barcelona</div>
