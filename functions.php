@@ -134,7 +134,28 @@ function reset_maybe_update_schema() {
     }
 
     reset_create_table();
+    reset_alter_table();
     update_option( 'reset_theme_db_version', RESET_THEME_DB_VERSION );
+}
+
+function reset_alter_table() {
+    global $wpdb;
+    $table = $wpdb->prefix . 'reset_registros';
+
+    $columns = $wpdb->get_results( "SHOW COLUMNS FROM $table" );
+    $column_names = array_column( $columns, 'Field' );
+
+    if ( ! in_array( 'category', $column_names, true ) ) {
+        $wpdb->query( "ALTER TABLE $table ADD COLUMN category VARCHAR(100) NOT NULL DEFAULT ''" );
+    }
+
+    if ( ! in_array( 'subject', $column_names, true ) ) {
+        $wpdb->query( "ALTER TABLE $table ADD COLUMN subject VARCHAR(255) NOT NULL DEFAULT ''" );
+    }
+
+    if ( ! in_array( 'message', $column_names, true ) ) {
+        $wpdb->query( "ALTER TABLE $table ADD COLUMN message LONGTEXT NULL" );
+    }
 }
 add_action( 'after_setup_theme', 'reset_maybe_update_schema' );
 
@@ -177,7 +198,7 @@ function reset_guardar_registro() {
     global $wpdb;
     $table = $wpdb->prefix . 'reset_registros';
 
-    $wpdb->insert( $table, [
+    $result = $wpdb->insert( $table, [
         'nombre'   => $nombre,
         'email'    => $email,
         'category' => $category,
@@ -185,6 +206,11 @@ function reset_guardar_registro() {
         'message'  => $message,
         'fecha'    => current_time( 'mysql' ),
     ] );
+
+    if ( $result === false ) {
+        error_log( 'Reset: Error inserting registro - ' . $wpdb->last_error );
+        wp_send_json_error( [ 'msg' => 'Error al guardar: ' . $wpdb->last_error ], 500 );
+    }
 
     wp_send_json_success( [ 'msg' => 'ok' ] );
 }
