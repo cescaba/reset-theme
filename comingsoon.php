@@ -135,7 +135,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      background: var(--warm-sand);
+      background: var(--ink-blue);
     }
 
     .a-eyebrow {
@@ -267,12 +267,16 @@
       border-left: 3px solid var(--matcha);
       font-family: 'ABC Diatype', monospace;
       font-size: 15px;
-      color: var(--matcha);
+      color: var(--matcha-mid);
       line-height: 1.6;
       margin-top: 16px;
-      max-width: 380px;
+      max-width: 500px;
     }
-
+    .success-msg em{ 
+      color: var(--matcha);
+      font-size: 18px;
+          font-family: 'DM Serif Display', serif;
+    }
     /* ANIMATIONS */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(24px); }
@@ -322,8 +326,10 @@
           <button type="submit" class="a-btn">Join (re)set →</button>
         </form>
         <div id="successMsg" class="success-msg">
-          ✓ &nbsp;Perfecto. Te avisamos cuando abramos.<br>
-          <span style="opacity:.6">Mientras tanto, síguenos en @resetmatchabar</span>
+          <em>Welcome — you’re officially part of the (re)set community. </em><br>
+          We’re getting everything ready behind the scenes.<br>
+          See you very soon.<br><br>
+          <span style="opacity:.6">Follow us @resetmatchabar</span>
         </div>
       </div>
     </div>
