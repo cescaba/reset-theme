@@ -19,13 +19,11 @@
 
 <section class="rituals-section">
     <div class="rituals-background-layer">
-        <div>
             <div class="rituals-content">
                 <span class="rituals-subtitle font-mono">We don’t serve drinks</span>
                 <h2 class="font-serif">We create rituals</h2>
                 <p class="font-mono">Ceremonial grade. Traceable origin. Paired with functional superfoods chosen one by one.</p>
             </div>
-        </div>
     </div>
 </section>
 <section class="story-way-section">
@@ -54,7 +52,7 @@
     <div class="purpose-container">
         <header class="purpose-header">
             <span class="font-mono">our purpose</span>
-            <h2 class="font-serif">(re)set exists to help people take<br>care of their energy</h2>
+            <h2 class="font-serif">(re)set exists to help people take care of their energy</h2>
         </header>
 
         <div class="purpose-grid">
