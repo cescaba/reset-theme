@@ -353,6 +353,8 @@
       var btn  = form.querySelector('button');
       btn.disabled = true;
 
+      console.log('Form submitted', { resetAjax, nonce: resetAjax.nonce });
+
       jQuery.post(resetAjax.url, {
         action:       'reset_registro',
         nonce:        resetAjax.nonce,
@@ -362,9 +364,14 @@
         form_loaded:  form.form_loaded.value,
         form_token:   form.form_token.value,
       })
-      .always(function() {
+      .done(function(response) {
+        console.log('Success:', response);
         form.style.display = 'none';
         document.getElementById('successMsg').style.display = 'block';
+      })
+      .fail(function(xhr, status, error) {
+        console.error('Error:', xhr.status, xhr.responseText);
+        btn.disabled = false;
       });
     });
   </script>
