@@ -161,8 +161,7 @@ add_action( 'after_setup_theme', 'reset_maybe_update_schema' );
 
 // ── AJAX: guardar registro (público) ────────────────────────────────────────
 function reset_guardar_registro() {
-    error_log( 'Reset: Función reset_guardar_registro ejecutada' );
-    check_ajax_referer( 'reset_nonce', 'nonce', false );
+    check_ajax_referer( 'reset_nonce', 'nonce' );
 
     $website = sanitize_text_field( $_POST['website'] ?? '' );
     $form_loaded = (int) ( $_POST['form_loaded'] ?? 0 );
