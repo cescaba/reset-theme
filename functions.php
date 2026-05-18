@@ -140,7 +140,7 @@ add_action( 'after_setup_theme', 'reset_maybe_update_schema' );
 
 // ── AJAX: guardar registro (público) ────────────────────────────────────────
 function reset_guardar_registro() {
-    check_ajax_referer( 'reset_nonce', 'nonce' );
+    check_ajax_referer( 'reset_nonce', 'nonce', true );
 
     $website = sanitize_text_field( $_POST['website'] ?? '' );
     $form_loaded = (int) ( $_POST['form_loaded'] ?? 0 );
@@ -177,7 +177,7 @@ function reset_guardar_registro() {
     global $wpdb;
     $table = $wpdb->prefix . 'reset_registros';
 
-    $wpdb->insert( $table, [
+    $result = $wpdb->insert( $table, [
         'nombre'   => $nombre,
         'email'    => $email,
         'category' => $category,
@@ -185,6 +185,11 @@ function reset_guardar_registro() {
         'message'  => $message,
         'fecha'    => current_time( 'mysql' ),
     ] );
+
+    if ( $result === false ) {
+        error_log( 'Reset: Error inserting registro - ' . $wpdb->last_error );
+        wp_send_json_error( [ 'msg' => 'Error al guardar: ' . $wpdb->last_error ], 500 );
+    }
 
     wp_send_json_success( [ 'msg' => 'ok' ] );
 }
