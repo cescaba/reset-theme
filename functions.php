@@ -7,7 +7,7 @@ define( 'RESET_THEME_VERSION', '1.0.1' );
 define( 'RESET_THEME_DB_VERSION', '2.0.0' );
 
 // Modo Coming Soon temporal para la portada.
-define( 'RESET_COMING_SOON_MODE', true);
+define( 'RESET_COMING_SOON_MODE', false);
 
 // URL del JSON de actualizaciones — cámbiala por la tuya antes de desplegar.
 // El archivo update.json debe estar accesible públicamente.
@@ -246,7 +246,7 @@ function reset_enqueue_scripts() {
     
     $js_to_enqueue = [];
 
-    if ( is_front_page() ) {
+    if ( is_front_page() || is_page_template( 'page-templates/inicio.php' ) ) {
         $js_to_enqueue['reset-front'] = 'assets/js/front.js';
     }
 
@@ -271,6 +271,8 @@ function reset_enqueue_scripts() {
             }
         }
     }
+
+    wp_enqueue_script( 'reset-header', get_template_directory_uri() . '/assets/js/header.js', ['jquery'], RESET_THEME_VERSION, true );
 
     wp_enqueue_script( 'jquery' );
 }

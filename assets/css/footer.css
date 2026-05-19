@@ -64,6 +64,13 @@
     transform: scaleX(0.7);
 }
 
+@media (max-width: 1024px) {
+    
+    .footer-nav {
+        gap: 60px;
+    }
+}
+
 @media (max-width: 768px) {
     .site-footer {
         padding: 24px 0;

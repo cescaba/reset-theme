@@ -60,7 +60,7 @@
 
         <div class="contact-form-content">
             <div class="form-wrapper">
-                <h2 class="font-serif">Send us<br>a message</h2>
+                <h2 class="font-serif">Send us a message</h2>
 
                 <form action="#" class="reset-form" id="contactForm">
                     <div style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden;" aria-hidden="true">

@@ -133,7 +133,7 @@
         </div>
     </div>
 </section>
-<section class="promise-section">
+<section class="promise-section" style="--bg-mobile: url('<?php echo get_template_directory_uri(); ?>/assets/images/bg-promise-powder.png');">
     <div class="promise-container">
         <span class="promise-label font-mono">our promise</span>
         <h2 class="font-serif">

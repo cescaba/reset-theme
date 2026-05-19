@@ -142,6 +142,32 @@
     max-width: 427px;
 }
 
+@media (max-width: 1024px) {
+    .hero-case-3 .hero-bg {
+        left: 45%;
+        width: 55%;
+    }
+
+    .hero-case-3 .hero-content-container {
+        padding-left: 24px;
+        max-width: 45%;
+        margin: 0;
+    }
+
+    .hero-case-3 .hero-title {
+        font-size: 54px;
+        line-height: 1.1;
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .hero-case-3 .hero-description {
+        font-size: 18px;
+        line-height: 1.4;
+        max-width: 100%;
+    }
+}
+
 /* --- RESPONSIVE --- */
 @media (max-width: 768px) {
 
@@ -179,12 +205,74 @@
 
     .hero-case-3 {
         flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+        background-color: #FFFFFF;
+        display: block; 
+        margin-bottom: 20px;
     }
-    .hero-case-3 .hero-bg, 
-    .hero-case-3 .hero-content-container {
+
+    .hero-case-3 .hero-bg {
+        position: relative;
         width: 100%;
+        aspect-ratio: 4 / 7; 
+        height: auto;
         left: 0;
-        height: 50%;
+        overflow: hidden;
+    }
+
+    .hero-case-3 .hero-bg img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center center; 
+    }
+
+    .hero-case-3 .hero-content-container {
+        position: relative;
+        width: 100%;
+        padding: 0 24px;
+        margin-top: -100px;
+        z-index: 10;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .hero-case-3 .hero-text-box {
+        background-color: #AFCBDE;
+        padding: 45px 30px 45px 30px;
+        max-width: 100%;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
+
+    .hero-case-3 .hero-pretitle {
+        font-size: 16px;
+        line-height: 19px;
+        margin-bottom: 16px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: #223E36;
+    }
+
+    .hero-case-3 .hero-pretitle::after  { content: '---'; }
+
+    .hero-case-3 .hero-title {
+        font-size: 48px;
+        line-height: 120%;
+        color: #223E36;
+        max-width: 100%;
+        margin-bottom: 14px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-case-3 .hero-description {
+        font-size: 16px;
+        line-height: 19px;
+        color: #223E36;
+        margin: 0 auto;
     }
     
 }

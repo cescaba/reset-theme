@@ -57,23 +57,80 @@
     .contact-grid {
         flex-wrap: wrap;
     }
+    
     .contact-col {
         flex: 0 0 50%;
-        border-bottom: 1px solid rgba(34, 62, 54, 0.1);
-    }
-    .contact-col:nth-child(2n+1) {
-        border-left: none;
-    }
-}
-
-@media (max-width: 600px) {
-    .contact-col {
-        flex: 0 0 100%;
-        border-left: none;
         padding: 40px 30px;
+        border-left: none;
+        border-bottom: 1px solid #CFCFBE;
     }
+
+    .contact-col:nth-child(2n) {
+        border-left: 1px solid #CFCFBE;
+    }
+
 }
 
+@media (max-width: 768px) {
+    .contact-grid {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .contact-info-section {
+        border-top: none;
+        border-bottom: none;
+    }
+
+    .contact-col {
+        flex: none;
+        width: 100%;
+        min-height: auto;
+        text-align: center; 
+        padding: 20px 24px;
+        box-sizing: border-box;
+        
+        border-left: none !important; 
+        border-bottom: 1px solid #FFFFFF; 
+    }
+
+    .contact-col:last-child {
+        border-bottom: none;
+    }
+
+    .contact-label {
+        font-style: italic;
+        font-size: 16px;
+        line-height: 19px;
+        text-transform: capitalize;
+        color: #AFAFAF;
+        margin-bottom: 7px;
+    }
+
+    .contact-data {
+        font-size: 24px;
+        line-height: 33px;
+        margin-bottom: 2px;
+    }
+
+    .contact-col:first-child .contact-data p {
+        display: inline;
+    }
+    .contact-col:first-child .contact-data p:first-child::after {
+        content: ' '; 
+    }
+
+    .contact-link {
+        display: inline-block;
+        font-size: 16px;
+        line-height: 19px;
+    }
+
+    
+    .contact-col:nth-child(2) .contact-data p:last-child {
+        margin-bottom: 0;
+    }
+}
 
 
 .contact-form-section {
@@ -223,9 +280,114 @@
 
 /* Responsive */
 @media (max-width: 1024px) {
-    .contact-form-grid { flex-direction: column; }
-    .contact-form-image, .contact-form-content { flex: 0 0 100%; width: 100%; }
-    .contact-form-image { height: 50vh; }
+    .contact-form-grid { 
+        flex-direction: column; 
+    }
+    
+    .contact-form-image, 
+    .contact-form-content { 
+        flex: 0 0 100%; 
+        width: 100%; 
+    }
+    
+    .contact-form-image { 
+        height: auto;
+        aspect-ratio: 16 / 10;
+        margin-right: 0;
+    }
+
+    .contact-form-content {
+        padding: 60px 40px;
+        justify-content: center;
+    }
+
+    .form-wrapper {
+        max-width: 600px;
+    }
+
+    .form-wrapper h2 {
+        font-size: 56px;
+        margin-bottom: 35px;
+        text-align: center;
+    }
+
+    .form-categories {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-form-image {
+        aspect-ratio: 1 / 1;
+    }
+
+    .contact-form-content {
+        padding: 62px 24px 60px 24px;
+    }
+
+    .form-wrapper h2 {
+        font-size: 40px;
+        line-height: 100%;
+        text-align: center;
+        margin-bottom: 28px;
+    }
+
+    .form-categories {
+        justify-content: center;
+        gap: 8px 12px;
+        margin-bottom: 30px;
+        max-width: 320px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .form-group {
+        margin-bottom: 30px;
+        width: 100%;
+    }
+
+    .form-group input, 
+    .form-group textarea {
+        font-size: 14px;
+        text-align: left;
+        padding-bottom: 24px;
+    }
+
+    .input-message {
+        padding-bottom: 20px;
+    }
+
+    .form-footer {
+        margin-top: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .contact-form-content .btn-capsule {
+        width: auto;
+        padding: 15px 19px;
+        font-size: 16px;
+        line-height: 1;
+        border-radius: 50px;
+    }
+
+    .privacy-note {
+        font-size: 10px;
+        line-height: 12px;
+        margin-top: 24px;
+        font-style: normal;
+        color: #A9A9A9;
+        max-width: 250px;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
 
@@ -298,6 +460,7 @@
 .view-link {
     color: #AFCBDE;
     text-decoration: none;
+    font-style: italic;
     border-bottom: 1px solid #AFCBDE;
     font-size: 24px;
     line-height: 29px;
@@ -325,9 +488,106 @@
     .find-us-grid {
         flex-direction: column-reverse;
     }
-    .find-us-content, .find-us-image {
+
+    .find-us-content, 
+    .find-us-image {
         flex: 0 0 100%;
         width: 100%;
     }
-    .find-us-image { height: 400px; margin-left: 0; }
+
+    .find-us-image {
+        height: auto;
+        aspect-ratio: 16 / 9;
+    }
+
+    .find-us-content {
+        padding: 60px 40px;
+        justify-content: center;
+    }
+
+    .find-us-wrapper {
+        max-width: 600px;
+    }
+
+    .find-us-content h2 {
+        font-size: 36px;
+        line-height: 1.2;
+    }
+}
+
+@media (max-width: 768px) {
+    .find-us-grid {
+        display: flex;
+        flex-direction: column-reverse; 
+    }
+    .find-us-image {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 1 / 1.1;
+        overflow: hidden;
+    }
+
+    .find-us-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        
+        transform: scale(1.55);
+        transform-origin: 65% center;
+        will-change: transform;
+    }
+
+    .find-us-content {
+        padding: 50px 24px 60px 24px;
+        box-sizing: border-box;
+    }
+
+    .find-us-wrapper {
+        max-width: 100%;
+    }
+
+    .find-us-label {
+        color: #AFCBDE !important;
+        font-size: 14px;
+        line-height: 17px;
+        margin-bottom: 24px;
+    }
+
+    .find-us-content h2 {
+        font-size: 32px;
+        line-height: 100%;
+        margin-bottom: 35px;
+    }
+
+    .transport-list {
+        margin-bottom: 27px;
+        width: 100%;
+    }
+
+    .transport-item {
+        padding: 20px 24px;
+        margin-inline: -24px;
+        border-top: 1px solid #3E675B;
+        justify-content: flex-start;
+        gap: 16px;
+    }
+
+    .transport-type {
+        font-size: 14px;
+        line-height: 17px;
+        color: #676767;
+        flex: 0 0 70px;
+    }
+
+    .transport-detail {
+        font-size: 14px;
+        line-height: 17px;
+    }
+
+    .view-link {
+        font-size: 16px;
+        line-height: 19px;
+        color: #AFCBDE !important;
+        border-bottom-color: #AFCBDE;
+    }
 }

@@ -192,6 +192,7 @@ a {
     .info-title {
         font-size: 48px;
         line-height: 100%;
+        text-align: center;
     }
 }
 
