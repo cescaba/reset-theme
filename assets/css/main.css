@@ -376,6 +376,7 @@ a {
 
     -webkit-overflow-scrolling: touch;
     padding-right: 10%;
+    user-select: none;
 }
 
 .products-scroll-wrapper::-webkit-scrollbar {
@@ -421,8 +422,17 @@ a {
     margin-bottom: 7px;
 }
 
-.product-img img { width: 100%; object-fit: cover; height: 100%;
-    display: block;}
+.product-img img {
+    width: 100%;
+    object-fit: cover;
+    height: 100%;
+    display: block;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+    drag: none;
+}
 
 .product-card h4 { font-family: 'Fragment Mono', monospace; font-size: 20px; line-height: 24px; font-weight: 400; margin-bottom: 7px;}
 .product-card p { font-family: 'Fragment Mono', monospace; font-size: 14px; line-height: 17px; font-weight: 400; font-style: italic; max-width: 240px;}
