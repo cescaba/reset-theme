@@ -12,7 +12,8 @@ if ( defined( 'RESET_COMING_SOON_MODE' ) && RESET_COMING_SOON_MODE ) {
     'case'        => 1,
     'title'       => 'Born<br>to<br><i class="font-italic">elevate.</i>',
     'description' => 'Functional Matcha Bar Barcelona.',
-    'video_url'      => get_template_directory_uri() . '/assets/images/RESET_video_1.mp4'
+    'video_url'      => get_template_directory_uri() . '/assets/images/bg-home.mov',
+    'video_url_mobile' => get_template_directory_uri() . '/assets/images/bg-home-mobile.mov',
 ]); ?>
   
 </div>

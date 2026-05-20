@@ -11,12 +11,9 @@
     <?php wp_body_open(); ?>
 
     <?php
-    $header_logo_color = '#AFCBDE';
-    $header_link_color = '#AFCBDE';
+    $header_logo_color = '#223E36';
+    $header_link_color = '#223E36';
 
-    if ( is_page_template( 'page-templates/contact.php' ) ) {
-        $header_logo_color = '#3E675B';
-    }
     ?>
 
     <header class="site-header" style="--header-logo-color: <?php echo esc_attr( $header_logo_color ); ?>; --header-link-color: <?php echo esc_attr( $header_link_color ); ?>;">

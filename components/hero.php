@@ -9,6 +9,7 @@ $title       = $args['title'] ?? '';
 $description = $args['description'] ?? '';
 $bg_url      = $args['bg_url'] ?? '';
 $video_url   = $args['video_url'] ?? '';
+$video_url_mobile  = $args['video_url_mobile'] ?? $video_url;
 $pretitle    = $args['pretitle'] ?? '';
 $footer_text = $args['footer_text'] ?? '';
 ?>
@@ -17,10 +18,16 @@ $footer_text = $args['footer_text'] ?? '';
     
     <div class="hero-bg">
         <?php if ( $case == 1 ) : ?>
-            <video autoplay muted loop playsinline class="hero-video">
+            <video autoplay muted loop playsinline class="hero-video hero-video-desktop">
                 <source src="<?php echo esc_url($video_url); ?>" type="video/mp4">
                 Tu navegador no soporta videos.
             </video>
+
+            <video autoplay muted loop playsinline class="hero-video hero-video-mobile">
+                <source src="<?php echo esc_url($video_url_mobile); ?>" type="video/mp4">
+                Tu navegador no soporta videos.
+            </video>
+
             <div class="hero-overlay"></div> 
 
         <?php elseif ( $case == 2 ) : ?>

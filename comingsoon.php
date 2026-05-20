@@ -209,7 +209,8 @@
       overflow: hidden;
     }
 
-    .a-right-video {
+    .a-right-video-desktop,
+    .a-right-video-mobile {
       position: absolute;
       top: 0;
       left: 0;
@@ -218,6 +219,9 @@
       object-fit: cover;
       z-index: 0;
     }
+
+    .a-right-video-desktop { display: block; }
+    .a-right-video-mobile { display: none; }
 
     .a-right > div {
       position: relative;
@@ -297,6 +301,8 @@
       .a-right { min-height: 80vh; min-height: 80dvh; flex: 1; padding: 32px 24px; gap: 32px; }
       .a-big-text { flex: 1; align-items: center; }
       .a-big-text img { object-fit: contain; }
+      .a-right-video-desktop { display: none !important; }
+      .a-right-video-mobile { display: block !important; }
     }
   </style>
 </head>
@@ -334,8 +340,12 @@
       </div>
     </div>
     <div class="a-right">
-      <video autoplay muted loop playsinline class="a-right-video">
-        <source src="<?php echo get_template_directory_uri(); ?>/assets/images/RESET_video_1.mp4" type="video/mp4">
+      <video autoplay muted loop playsinline class="a-right-video-desktop">
+        <source src="<?php echo get_template_directory_uri(); ?>/assets/images/bg-home.mov" type="video/mp4">
+        Tu navegador no soporta videos.
+      </video>
+      <video autoplay muted loop playsinline class="a-right-video-mobile">
+        <source src="<?php echo get_template_directory_uri(); ?>/assets/images/bg-home-mobile.mov" type="video/mp4">
         Tu navegador no soporta videos.
       </video>
       <div class="a-info">

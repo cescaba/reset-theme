@@ -5,8 +5,8 @@
     width: 100%;
     z-index: 100;
     padding: 12px 0;
-    border-bottom: 2px solid #D9D9D9;
     transition: background 0.3s ease;
+    background-color: #AFCBDE;
 }
 
 .header-container {
