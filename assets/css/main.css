@@ -316,7 +316,7 @@ a {
     padding-right: 0;
     gap: 71px;
     align-items: flex-start;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .grid-header {
@@ -367,19 +367,28 @@ a {
     overflow-x: auto; /* Permite el scroll horizontal */
     overflow-y: hidden;
     width: 100%;
-    
+
     /* Activa el frenado magnético (Snap) */
-    scroll-snap-type: x mandatory; 
-    
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    
-    -webkit-overflow-scrolling: touch; 
+    scroll-snap-type: x mandatory;
+
+    scrollbar-width: auto;
+    -ms-overflow-style: auto;
+
+    -webkit-overflow-scrolling: touch;
     padding-right: 10%;
 }
 
 .products-scroll-wrapper::-webkit-scrollbar {
-    display: none;
+    height: 8px;
+}
+
+.products-scroll-wrapper::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.products-scroll-wrapper::-webkit-scrollbar-thumb {
+    background: #AFCBDE;
+    border-radius: 4px;
 }
 
 .product-card {
