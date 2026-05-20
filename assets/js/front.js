@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const firstCard = grid.querySelector('.product-card');
         const cardWidth = firstCard.offsetWidth;
         const gap = 24;
-        
+
         // Si quieres avanzar de 3 en 3:
         return (cardWidth + gap) * 3;
     };
@@ -81,5 +81,16 @@ document.addEventListener('DOMContentLoaded', () => {
             behavior: 'smooth'
         });
     });
+
+    // Habilitar scroll con rueda del mouse
+    grid.addEventListener('wheel', (e) => {
+        if (grid.scrollWidth > grid.clientWidth) {
+            e.preventDefault();
+            grid.scrollBy({
+                left: e.deltaY > 0 ? 100 : -100,
+                behavior: 'smooth'
+            });
+        }
+    }, { passive: false });
 });
 
