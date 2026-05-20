@@ -202,6 +202,7 @@ a {
 .products-section {
     padding: 100px 0;
     background-color: #F6F5F2;
+    overflow: hidden; /* recorta el peek de la 4ta tarjeta en el borde */
 }
 
 .slider-main {
@@ -364,38 +365,26 @@ a {
 .products-scroll-wrapper {
     display: flex;
     gap: 24px;
-    overflow-x: auto; /* Permite el scroll horizontal */
+    overflow-x: auto;
     overflow-y: hidden;
+    /* Extender hasta el borde derecho de pantalla */
     width: 100%;
-
-    /* Activa el frenado magnético (Snap) */
-    scroll-snap-type: x mandatory;
-
-    scrollbar-width: auto;
-    -ms-overflow-style: auto;
-
-    -webkit-overflow-scrolling: touch;
-    padding-right: 10%;
+    padding-right: 0;
     user-select: none;
+    scroll-snap-type: none;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
 }
 
 .products-scroll-wrapper::-webkit-scrollbar {
-    height: 8px;
-}
-
-.products-scroll-wrapper::-webkit-scrollbar-track {
-    background: #f1f1f1;
-}
-
-.products-scroll-wrapper::-webkit-scrollbar-thumb {
-    background: #AFCBDE;
-    border-radius: 4px;
+    display: none;
 }
 
 .product-card {
-    flex: 0 0 300px; 
-    min-width: 280px;
-    scroll-snap-align: start; 
+    flex: 0 0 260px;
+    min-width: 240px;
+    scroll-snap-align: none;
     transition: transform 0.3s ease;
 }
 
