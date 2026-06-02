@@ -57,6 +57,11 @@
 /* --- CASO 1: VIDEO --- */
 .hero-case-1 {
     background-color: #A9A9A9;
+    align-items: flex-start;
+}
+
+.hero-case-1 .hero-content-container {
+    padding-top: 55px;
 }
 
 .hero-case-1 .hero-overlay {
@@ -160,6 +165,10 @@
 }
 
 @media (max-width: 1024px) {
+    .hero-case-1 .hero-content-container {
+        padding-top: 45px;
+    }
+
     .hero-case-3 .hero-bg {
         left: 45%;
         width: 55%;
@@ -187,6 +196,10 @@
 
 /* --- RESPONSIVE --- */
 @media (max-width: 768px) {
+
+    .hero-case-1 .hero-content-container {
+        padding-top: 30px;
+    }
 
     .hero-case-1 .hero-video-desktop {
         display: none !important;
