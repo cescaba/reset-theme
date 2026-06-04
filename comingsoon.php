@@ -154,6 +154,7 @@
       letter-spacing: -0.04em;
       color: var(--matcha-light);
       margin-bottom: 20px;
+      font-style: italic;
     }
 
     .a-launch-date {
@@ -317,7 +318,7 @@
   <div class="a-grid">
     <div class="a-left">
       <div>
-        <div class="a-eyebrow">Functional Matcha Bar · Barcelona · Opening soon</div>
+        <div class="a-eyebrow">Functional Matcha Bar · Barcelona</div>
         <div class="a-headline">Born to elevate.</div>
         <div class="a-launch-date">Launching Monday,<br>June 8</div>
       </div>
