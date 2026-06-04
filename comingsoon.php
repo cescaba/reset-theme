@@ -166,6 +166,13 @@
       font-weight: 400;
     }
 
+    .a-launch-subtitle {
+      display: block;
+      color: #FFFFFF;
+      font-size: clamp(24px, 3vw, 36px);
+      margin-top: 16px;
+    }
+
     .a-bottom { margin-top: 60px; }
     .a-tagline {
       font-family: 'Fragment Mono', monospace;
@@ -320,7 +327,7 @@
       <div>
         <div class="a-eyebrow">Functional Matcha Bar · Barcelona</div>
         <div class="a-headline">Born to elevate.</div>
-        <div class="a-launch-date">Launching Monday,<br>June 8</div>
+        <div class="a-launch-date">Launching Monday,<br>June 8<br><span class="a-launch-subtitle">we open our doors</span></div>
       </div>
       <div class="a-bottom">
         <p class="a-tagline">A functional matcha bar built<br>
