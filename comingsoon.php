@@ -147,6 +147,15 @@
       margin-bottom: 40px;
     }
 
+    .a-launch-date {
+      font-family: 'DM Serif Display', serif;
+      font-size: 32px;
+      line-height: 1.2;
+      color: var(--matcha);
+      margin-bottom: 24px;
+      font-weight: 400;
+    }
+
     .a-headline {
       font-family: 'DM Serif Display', serif;
       font-size: clamp(64px, 8vw, 108px);
@@ -312,6 +321,7 @@
     <div class="a-left">
       <div>
         <div class="a-eyebrow">Functional Matcha Bar · Barcelona · Opening soon</div>
+        <div class="a-launch-date">Launching Monday, June 8</div>
         <div class="a-headline">Born<br>to<br><em>elevate.</em></div>
       </div>
       <div class="a-bottom">
