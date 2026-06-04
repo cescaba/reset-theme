@@ -149,8 +149,8 @@
 
     .a-launch-date {
       font-family: 'DM Serif Display', serif;
-      font-size: 32px;
-      line-height: 1.2;
+      font-size: clamp(48px, 6vw, 72px);
+      line-height: 0.92;
       color: var(--matcha);
       margin-bottom: 24px;
       font-weight: 400;
@@ -158,7 +158,7 @@
 
     .a-headline {
       font-family: 'DM Serif Display', serif;
-      font-size: clamp(64px, 8vw, 108px);
+      font-size: clamp(56px, 7vw, 88px);
       line-height: 0.92;
       letter-spacing: -0.04em;
       color: var(--matcha);
