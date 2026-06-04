@@ -149,17 +149,17 @@
 
     .a-headline {
       font-family: 'DM Serif Display', serif;
-      font-size: clamp(40px, 5vw, 56px);
+      font-size: clamp(38px, 4.2vw, 50px);
       line-height: 0.92;
       letter-spacing: -0.04em;
       color: var(--matcha-light);
-      margin-bottom: 20px;
+      margin-bottom: 70px;
       font-style: italic;
     }
 
     .a-launch-date {
       font-family: 'DM Serif Display', serif;
-      font-size: clamp(56px, 7vw, 88px);
+      font-size: clamp(72px, 9vw, 120px);
       line-height: 0.92;
       color: var(--matcha);
       margin-bottom: 24px;
@@ -169,7 +169,7 @@
     .a-launch-subtitle {
       display: block;
       color: #FFFFFF;
-      font-size: clamp(24px, 3vw, 36px);
+      font-size: clamp(36px, 4.5vw, 56px);
       margin-top: 16px;
     }
 
@@ -327,7 +327,7 @@
       <div>
         <div class="a-eyebrow">Functional Matcha Bar · Barcelona</div>
         <div class="a-headline">Born to elevate.</div>
-        <div class="a-launch-date">Launching Monday,<br>June 8<br><span class="a-launch-subtitle">we open our doors</span></div>
+        <div class="a-launch-date">June 8<br><span class="a-launch-subtitle">we open our doors</span></div>
       </div>
       <div class="a-bottom">
         <p class="a-tagline">A functional matcha bar built<br>
