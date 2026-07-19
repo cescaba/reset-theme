@@ -149,7 +149,7 @@
 
     .a-headline {
       font-family: 'DM Serif Display', serif;
-      font-size: clamp(38px, 4.2vw, 50px);
+      font-size: clamp(86px, 9.5vw, 112px);
       line-height: 0.92;
       letter-spacing: -0.04em;
       color: var(--matcha-light);
@@ -327,7 +327,6 @@
       <div>
         <div class="a-eyebrow">Functional Matcha Bar · Barcelona</div>
         <div class="a-headline">Born to elevate.</div>
-        <div class="a-launch-date">June 8<br><span class="a-launch-subtitle">we open our doors</span></div>
       </div>
       <div class="a-bottom">
         <p class="a-tagline">A functional matcha bar built<br>
