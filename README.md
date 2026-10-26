@@ -183,6 +183,6 @@ Las credenciales se configuran en **Settings → Secrets and variables → Actio
 
 | Secret | Valor |
 |---|---|
-| `FTP_SERVER` | Dirección del servidor FTP |
-| `FTP_USERNAME` | Usuario FTP |
-| `FTP_PASSWORD` | Contraseña FTP |
+| `FTP_SERVER` o `FTP_HOST` | Dirección del servidor FTP |
+| `FTP_USERNAME` o `FTP_USER` | Usuario FTP |
+| `FTP_PASSWORD` o `FTP_PASS` | Contraseña FTP |
