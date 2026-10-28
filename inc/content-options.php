@@ -120,6 +120,7 @@ function reset_content_defaults() {
 			'success_text'  => "We’re getting everything ready behind the scenes.\nSee you very soon.",
 		],
 		'global' => [
+			'menu_file'     => '',
 			'footer_title'  => 'Lets (re)set',
 			'footer_social' => 'Follow us @resetmatchabar',
 			'footer_social_url' => 'https://www.instagram.com/resetmatchabar',
@@ -255,6 +256,21 @@ function reset_menu_target_url( $url ) {
 		return $url;
 	}
 	return home_url( $url );
+}
+
+// Carta subida desde Medios (PDF o imagen). Si existe, los botones "Our menú"
+// abren ese archivo en una pestaña nueva; si no, se usa el destino temporal.
+function reset_menu_file_url() {
+	return (string) reset_content( 'global', 'menu_file' );
+}
+
+function reset_menu_href( $fallback_url = '/menu' ) {
+	$file = reset_menu_file_url();
+	return $file !== '' ? $file : reset_menu_target_url( $fallback_url );
+}
+
+function reset_menu_link_attrs() {
+	return reset_menu_file_url() !== '' ? ' target="_blank" rel="noopener"' : '';
 }
 
 // ── Esquema de campos (para pintar el admin) ──────────────────────────────────
@@ -419,6 +435,9 @@ function reset_content_schema() {
 			'title' => 'Global (header/footer)',
 			'desc'  => 'Textos comunes a todo el sitio.',
 			'sections' => [
+				'Carta (botón "Our menú")' => [
+					[ 'key' => 'menu_file', 'label' => 'Archivo de la carta', 'type' => 'file', 'desc' => 'PDF o imagen de la biblioteca de Medios. Se abre en una pestaña nueva al pulsar "Our menú" (header y botones de menú). Si está vacío, los botones llevan a la sección de productos de Inicio.' ],
+				],
 				'Footer' => [
 					[ 'key' => 'footer_title', 'label' => 'Título footer', 'type' => 'text' ],
 					[ 'key' => 'footer_social', 'label' => 'Texto social', 'type' => 'text' ],
@@ -478,7 +497,7 @@ function reset_content_sanitize( $value, $group ) {
 			// Como en las entradas: con 'unfiltered_html' se guarda tal cual,
 			// si no se filtra con wp_kses_post.
 			$clean[ $k ] = current_user_can( 'unfiltered_html' ) ? $v : wp_kses_post( $v );
-		} elseif ( in_array( $type, [ 'image', 'video' ], true ) ) {
+		} elseif ( in_array( $type, [ 'image', 'video', 'file' ], true ) ) {
 			$clean[ $k ] = esc_url_raw( trim( (string) $v ) );
 		} elseif ( in_array( $type, [ 'textarea', 'textarea_lines' ], true ) ) {
 			$clean[ $k ] = sanitize_textarea_field( $v );
@@ -546,7 +565,7 @@ function reset_content_render_page( $group ) {
 						$val = $values[ $f['key'] ] ?? '';
 						$name = 'reset_content_' . $group . '[' . esc_attr( $f['key'] ) . ']';
 						$wide = in_array( $f['type'], [ 'textarea', 'textarea_lines', 'html', 'products', 'beliefs' ], true ) ? ' reset-field-wide' : '';
-						$is_media = in_array( $f['type'], [ 'image', 'video' ], true );
+						$is_media = in_array( $f['type'], [ 'image', 'video', 'file' ], true );
 						if ( $is_media ) $wide .= ' reset-field-wide';
 					?>
 						<div class="reset-field<?php echo esc_attr( $wide ); ?>">
@@ -646,11 +665,13 @@ function reset_content_render_page( $group ) {
 							<?php elseif ( $is_media ) : ?>
 								<div class="reset-media-row">
 									<input type="url" name="<?php echo $name; ?>" value="<?php echo esc_attr( $val ); ?>" placeholder="https://…" class="regular-text reset-media-url">
-									<button type="button" class="button reset-media-btn" data-type="<?php echo $f['type'] === 'video' ? 'video' : 'image'; ?>">Subir / elegir</button>
+									<button type="button" class="button reset-media-btn" data-type="<?php echo esc_attr( $f['type'] ); ?>">Subir / elegir</button>
 								</div>
 								<?php if ( $val ) : ?>
-									<?php if ( $f['type'] === 'image' ) : ?>
+									<?php if ( $f['type'] === 'image' || ( $f['type'] === 'file' && preg_match( '/\.(jpe?g|png|gif|webp|avif)$/i', (string) wp_parse_url( $val, PHP_URL_PATH ) ) ) ) : ?>
 										<img src="<?php echo esc_url( $val ); ?>" class="reset-preview" alt="">
+									<?php elseif ( $f['type'] === 'file' ) : ?>
+										<p class="description"><a href="<?php echo esc_url( $val ); ?>" target="_blank" rel="noopener"><?php echo esc_html( wp_basename( (string) wp_parse_url( $val, PHP_URL_PATH ) ) ); ?></a></p>
 									<?php else : ?>
 										<video src="<?php echo esc_url( $val ); ?>" class="reset-preview" muted playsinline></video>
 									<?php endif; ?>

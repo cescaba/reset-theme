@@ -2,8 +2,10 @@ jQuery(function($){
   $(document).on('click','.reset-media-btn',function(e){
     e.preventDefault();
     var btn = $(this), row = btn.closest('.reset-media-row'), input = row.find('.reset-media-url');
-    var isVideo = btn.data('type') === 'video';
-    var frame = wp.media({ title:'Elegir archivo', multiple:false, library:{ type: isVideo ? 'video' : 'image' } });
+    var kind = btn.data('type');
+    var isVideo = kind === 'video';
+    var libType = isVideo ? 'video' : (kind === 'file' ? ['application/pdf', 'image'] : 'image');
+    var frame = wp.media({ title:'Elegir archivo', multiple:false, library:{ type: libType } });
     frame.on('select',function(){
       var att = frame.state().get('selection').first().toJSON();
       input.val(att.url).trigger('change');
@@ -11,7 +13,7 @@ jQuery(function($){
       var prev = wrap.find('.reset-preview');
       if (prev.length) {
         if (prev.is('img')) prev.attr('src', att.url);
-      } else if (!isVideo) {
+      } else if (kind === 'image') {
         $('<img class="reset-preview" alt="">').attr('src', att.url).insertAfter(row);
       }
     });

@@ -3,7 +3,7 @@
 // ── Versión del tema ────────────────────────────────────────────────────────
 // Para actualizar: sube la nueva versión aquí Y en style.css, luego
 // actualiza también el archivo update.json en tu servidor.
-define( 'RESET_THEME_VERSION', '1.0.6' );
+define( 'RESET_THEME_VERSION', '1.0.10' );
 define( 'RESET_THEME_DB_VERSION', '2.0.0' );
 
 // Modo Coming Soon temporal para la portada.

@@ -47,7 +47,7 @@
                 </a>
             </div>
             <div class="header-right">
-                <a class="menu-pill" href="<?php echo esc_url( reset_menu_target_url( '/menu' ) ); ?>">Our menú →</a>
+                <a class="menu-pill" href="<?php echo esc_url( reset_menu_href( '/menu' ) ); ?>"<?php echo reset_menu_link_attrs(); ?>>Our menú →</a>
                 <button class="hamburger" aria-controls="primary-menu" aria-expanded="false" aria-label="Abrir menú">
                     <span class="hamburger-box"><span class="hamburger-inner"></span></span>
                 </button>

@@ -49,9 +49,15 @@
     position: relative;
     z-index: 10;
     width: 100%;
-    max-width: 1446px;
+    max-width: 1728px;
     margin: 0 auto;
-    padding: 0 16px;
+    padding: 0 87px 0 69px;
+}
+
+@media (max-width: 900px) {
+    .hero-content-container {
+        padding: 0 20px;
+    }
 }
 
 /* --- CASO 1: VIDEO --- */
@@ -134,10 +140,6 @@
     width: 59%;
 }
 
-.hero-case-3 .hero-content-container {
-    padding-left: 40px;
-}
-
 .hero-case-3 .hero-pretitle {
     display: block;
     font-size: 24px;
@@ -175,7 +177,7 @@
     }
 
     .hero-case-3 .hero-content-container {
-        padding-left: 24px;
+        padding-left: 69px;
         max-width: 45%;
         margin: 0;
     }
@@ -194,11 +196,19 @@
     }
 }
 
+@media (max-width: 900px) {
+    .hero-case-3 .hero-content-container {
+        padding-left: 20px;
+    }
+}
+
 /* --- RESPONSIVE --- */
 @media (max-width: 768px) {
 
     .hero-case-1 .hero-content-container {
         padding-top: 112px;
+        top: 100vw;
+        text-align: center;
     }
 
     .hero-case-1 .hero-video-desktop {
@@ -212,13 +222,13 @@
     .hero-case-1 .hero-title {
         font-size: 77px;
         line-height: 73px;
+        padding-bottom: 20px;
     }
 
     .hero-case-1 .hero-description {
         font-size: 16px;
         line-height: 19px;
-        
-        max-width: 260px;
+        max-width: none;
     }
 
     .hero-case-2 .hero-title {
@@ -269,7 +279,7 @@
     .hero-case-3 .hero-content-container {
         position: relative;
         width: 100%;
-        padding: 0 24px;
+        padding: 0 20px;
         margin-top: -100px;
         z-index: 10;
         max-width: 100%;

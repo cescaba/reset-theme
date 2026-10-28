@@ -41,7 +41,7 @@ $beliefs = function_exists( 'reset_get_beliefs' ) ? reset_get_beliefs( 'story', 
                 <h2 class="font-serif"><?php echo esc_html( reset_content( 'story', 'way_title' ) ); ?></h2>
                 <p class="font-mono"><?php echo esc_html( reset_content( 'story', 'way_desc' ) ); ?></p>
 
-                <a href="<?php echo esc_url( reset_menu_target_url( reset_content( 'story', 'way_url' ) ) ); ?>" class="btn-capsule font-mono">
+                <a href="<?php echo esc_url( reset_menu_href( reset_content( 'story', 'way_url' ) ) ); ?>"<?php echo reset_menu_link_attrs(); ?> class="btn-capsule font-mono">
                     <?php echo esc_html( reset_content( 'story', 'way_btn' ) ); ?>
                 </a>
             </div>
@@ -134,7 +134,7 @@ $beliefs = function_exists( 'reset_get_beliefs' ) ? reset_get_beliefs( 'story', 
         </h2>
 
         <div class="promise-action">
-            <a href="<?php echo esc_url( reset_menu_target_url( reset_content( 'story', 'promise_url' ) ) ); ?>" class="btn-capsule font-mono">
+            <a href="<?php echo esc_url( reset_menu_href( reset_content( 'story', 'promise_url' ) ) ); ?>"<?php echo reset_menu_link_attrs(); ?> class="btn-capsule font-mono">
                 <?php echo esc_html( reset_content( 'story', 'promise_btn' ) ); ?>
             </a>
         </div>
