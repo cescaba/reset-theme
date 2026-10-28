@@ -1,0 +1,26 @@
+/* (re)set · Contenidos — admin pro */
+.reset-wrap { max-width: 1100px; }
+.reset-head { display:flex; gap:16px; align-items:center; background:#223E36; color:#F1F1DE; padding:18px 22px; border-radius:12px; margin:12px 0 20px; }
+.reset-head h1 { color:#F1F1DE !important; margin:0; font-size:22px; }
+.reset-head p { margin:4px 0 0; opacity:.75; }
+.reset-head-badge { background:#AFCBDE; color:#223E36; font-weight:800; padding:8px 14px; border-radius:999px; letter-spacing:-.02em; }
+.reset-card { background:#fff; border:1px solid #e2e2d8; border-radius:12px; padding:20px 22px; margin-bottom:18px; box-shadow:0 1px 2px rgba(34,62,54,.06); }
+.reset-card h2 { margin:0 0 16px; font-size:15px; text-transform:uppercase; letter-spacing:.08em; color:#223E36; border-bottom:1px solid #eee; padding-bottom:10px; }
+.reset-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px 20px; }
+.reset-field { display:flex; flex-direction:column; gap:6px; }
+.reset-field-wide { grid-column:1 / -1; }
+.reset-field label { font-weight:600; color:#223E36; }
+.reset-field input[type=text], .reset-field input[type=url], .reset-field textarea { width:100%; max-width:100%; border:1px solid #d8d8cc; border-radius:8px; padding:9px 12px; }
+.reset-field textarea.mono { font-family:ui-monospace,Menlo,Consolas,monospace; font-size:12.5px; }
+.reset-field .description { color:#6b7a74; font-style:normal; margin:0; }
+.reset-media-row { display:flex; gap:8px; }
+.reset-media-row input { flex:1; }
+.reset-preview { max-width:220px; border-radius:8px; border:1px solid #ddd; margin-top:8px; }
+.reset-preview-icon { max-width:72px; background:#223E36; padding:8px; }
+.reset-form .button-primary { background:#223E36; border-color:#223E36; padding:6px 26px; font-size:14px; }
+.reset-products { display:flex; flex-direction:column; gap:14px; }
+.reset-product-row { border:1px solid #e2e2d8; border-radius:10px; padding:14px 16px; background:#fafaf6; display:flex; flex-direction:column; gap:6px; }
+.reset-product-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; }
+.reset-product-top strong { color:#223E36; }
+.reset-product-row label { font-weight:600; color:#223E36; font-size:12.5px; margin-top:4px; }
+@media (max-width:800px){ .reset-grid{grid-template-columns:1fr;} }

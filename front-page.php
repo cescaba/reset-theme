@@ -1,46 +1,50 @@
 <?php
-if ( defined( 'RESET_COMING_SOON_MODE' ) && RESET_COMING_SOON_MODE ) {
-    include get_template_directory() . '/comingsoon.php';
-    return;
-}
+// Portada: usa los contenidos del grupo "Inicio" del admin.
 ?>
 
 <?php get_header(); ?>
 
+<?php
+$hero_title  = reset_content( 'inicio', 'hero_title' );
+$hero_desc   = reset_content( 'inicio', 'hero_desc' );
+$sig_items   = reset_parse_lines( reset_content( 'inicio', 'signature_products' ), 2 );
+$grid_items  = function_exists( 'reset_get_grid_products' ) ? reset_get_grid_products( 'inicio', 'grid_products' ) : array_map( function( $p ) { return [ 'name' => $p[0], 'desc' => $p[1], 'image' => $p[2] ]; }, reset_parse_lines( reset_content( 'inicio', 'grid_products' ), 3 ) );
+?>
+
 <div class="site-wrapper">
   <?php get_template_part( 'components/hero', null, [
     'case'        => 1,
-    'title'       => 'Born<br>to<i class="font-italic">elevate.</i>',
-    'description' => 'Functional Matcha Bar Barcelona.',
-    'video_url'      => get_template_directory_uri() . '/assets/images/bg-home.mov',
-    'video_url_mobile' => get_template_directory_uri() . '/assets/images/bg-home-mobile.mov',
+    'title'       => $hero_title,
+    'description' => $hero_desc,
+    'video_url'      => reset_content( 'inicio', 'hero_video' ),
+    'video_url_mobile' => reset_content( 'inicio', 'hero_video_mobile' ),
 ]); ?>
-  
+
 </div>
 
 <section class="info-split">
     <div class="info-text-block">
         <h2 class="info-title font-serif">
-            We combine high-quality matcha with functional superfoods.
+            <?php echo esc_html( reset_content( 'inicio', 'info_title' ) ); ?>
         </h2>
     </div>
 
     <div class="info-images-block">
         <div class="info-image-item">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/info-matcha-1.png" alt="Matcha preparation">
+            <img src="<?php echo esc_url( reset_content( 'inicio', 'info_img1' ) ); ?>" alt="Matcha preparation">
         </div>
         <div class="info-image-item">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/info-matcha-2.png" alt="Matcha cup (re)set">
+            <img src="<?php echo esc_url( reset_content( 'inicio', 'info_img2' ) ); ?>" alt="Matcha cup (re)set">
         </div>
     </div>
 </section>
 
-<section class="products-section">
+<section class="products-section" id="crafted-body-mind">
     <div class="slider-container">
         <div class="slider-main">
             <div class="slider-image-wrapper">
                 <button class="slider-arrow prev">←</button>
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/matcha-can-1.png" alt="Matcha Drink">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/matcha-can-1.png' ); ?>" alt="Matcha Drink">
                 <button class="slider-arrow next">→</button>
                 <div class="slider-dots">
                     <span class="dot active"></span>
@@ -48,60 +52,45 @@ if ( defined( 'RESET_COMING_SOON_MODE' ) && RESET_COMING_SOON_MODE ) {
                     <span class="dot"></span>
                 </div>
             </div>
-            
+
             <div class="slider-text">
-                <h2 class="font-serif">Our signature<br>Matcha Drinks</h2>
-                
+                <h2 class="font-serif"><?php echo wp_kses_post( reset_content( 'inicio', 'signature_title' ) ); ?></h2>
+
+                <?php foreach ( $sig_items as $s ) : ?>
                 <div class="product-detail">
-                    <h3 class="font-diatype-bold">Matcha latte Caliente / Frío</h3>
-                    <p class="font-diatype-italic">Matcha ceremonial con tu leche favorita</p>
+                    <h3 class="font-diatype-bold"><?php echo esc_html( $s[0] ); ?></h3>
+                    <p class="font-diatype-italic"><?php echo esc_html( $s[1] ); ?></p>
                 </div>
-                <div class="product-detail">
-                    <h3 class="font-diatype-bold">Pistachio cloud</h3>
-                    <p class="font-diatype-italic">Matcha latte frío con crema de pistacho</p>
-                </div>
-                <div class="product-detail">
-                    <h3 class="font-diatype-bold">Strawberry cloud</h3>
-                    <p class="font-diatype-italic">Matcha latte frío con crema de fresa</p>
-                </div>
-                <div class="product-detail">
-                    <h3 class="font-diatype-bold">Reset cloud</h3>
-                    <p class="font-diatype-italic">Matcha latte frío con crema de espirulina</p>
-                </div>
+                <?php endforeach; ?>
             </div>
         </div>
     </div>
 
     <div class="products-grid-container">
         <div class="grid-header">
-            <h2 class="font-serif">Crafted for<br>body & mind</h2>
-            <p class="font-diatype">Funcional matcha blends made with premium ingredients and purpose.</p>
+            <h2 class="font-serif"><?php echo wp_kses_post( reset_content( 'inicio', 'grid_title' ) ); ?></h2>
+            <p class="font-diatype"><?php echo esc_html( reset_content( 'inicio', 'grid_desc' ) ); ?></p>
             <div class="grid-nav-arrows">
                 <button class="grid-arrow prev" id="gridPrev">←</button>
                 <button class="grid-arrow next" id="gridNext">→</button>
             </div>
-            <a href="#" class="full-menu-link font-diatype">Full menu →</a>
+            <a href="<?php echo esc_url( reset_content( 'inicio', 'grid_link_url' ) ); ?>" class="full-menu-link font-diatype"><?php echo esc_html( reset_content( 'inicio', 'grid_link_text' ) ); ?></a>
         </div>
 
         <div class="products-scroll-wrapper" id="productGrid">
-            <?php 
-            $products = [
-                ['name' => 'Reset Matcha', 'desc' => 'Matcha latte frío con crema de fresa', 'img' => 'matcha-can-2.png'],
-                ['name' => 'Calm Matcha',  'desc' => 'Matcha latte frío con crema de fresa', 'img' => 'matcha-can-3.png'],
-                ['name' => 'Focus Latte',  'desc' => 'Matcha latte frío con crema de fresa', 'img' => 'matcha-can-4.png'],
-                ['name' => 'Citrus Matcha', 'desc' => 'Matcha latte frío con crema de fresa', 'img' => 'matcha-can-2.png'],
-                ['name' => 'Reset Matcha', 'desc' => 'Matcha latte frío con crema de fresa', 'img' => 'matcha-can-2.png'],
-                ['name' => 'Calm Matcha',  'desc' => 'Matcha latte frío con crema de fresa', 'img' => 'matcha-can-3.png'],
-                ['name' => 'Focus Latte',  'desc' => 'Matcha latte frío con crema de fresa', 'img' => 'matcha-can-4.png'],
-                ['name' => 'Citrus Matcha', 'desc' => 'Matcha latte frío con crema de fresa', 'img' => 'matcha-can-2.png'],
-                ];
-            foreach ($products as $product) : ?>
+            <?php foreach ( $grid_items as $product ) :
+                $p_name  = is_array( $product ) ? ( $product['name'] ?? $product[0] ?? '' ) : '';
+                $p_desc  = is_array( $product ) ? ( $product['desc'] ?? $product[1] ?? '' ) : '';
+                $p_image = is_array( $product ) ? ( $product['image'] ?? $product[2] ?? '' ) : '';
+            ?>
                 <div class="product-card">
                     <div class="product-img">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/<?php echo $product['img']; ?>" alt="<?php echo esc_attr($product['name']); ?>">
+                        <?php if ( $p_image ) : ?>
+                        <img src="<?php echo esc_url( $p_image ); ?>" alt="<?php echo esc_attr( $p_name ); ?>">
+                        <?php endif; ?>
                     </div>
-                    <h4 class="font-diatype-bold"><?php echo $product['name']; ?></h4>
-                    <p class="font-diatype-italic"><?php echo $product['desc']; ?></p>
+                    <h4 class="font-diatype-bold"><?php echo esc_html( $p_name ); ?></h4>
+                    <p class="font-diatype-italic"><?php echo esc_html( $p_desc ); ?></p>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -112,18 +101,18 @@ if ( defined( 'RESET_COMING_SOON_MODE' ) && RESET_COMING_SOON_MODE ) {
     <div class="space-container">
         <div class="space-content-wrapper">
             <div class="space-image-wrapper">
-                <a href="#" class="view-map-link font-mono">View map</a>
-                
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/bg-space.png" alt="Our space in Barcelona">
+                <a href="<?php echo esc_url( reset_content( 'inicio', 'space_map_url' ) ); ?>" class="view-map-link font-mono"><?php echo esc_html( reset_content( 'inicio', 'space_map_text' ) ); ?></a>
+
+                <img src="<?php echo esc_url( reset_content( 'inicio', 'space_img' ) ); ?>" alt="Our space in Barcelona">
             </div>
-            
+
             <div class="space-info-card">
-                <span class="info-label font-diatype">Our space</span>
-                <h2 class="font-serif"><i>Born in</i><br>BARCELONA</h2>
-                
+                <span class="info-label font-diatype"><?php echo esc_html( reset_content( 'inicio', 'space_label' ) ); ?></span>
+                <h2 class="font-serif"><?php echo wp_kses_post( reset_content( 'inicio', 'space_title' ) ); ?></h2>
+
                 <div class="address-details font-diatype">
-                    <p>C/ Casanova 189</p>
-                    <p>Barcelona</p>
+                    <p><?php echo esc_html( reset_content( 'inicio', 'space_addr1' ) ); ?></p>
+                    <p><?php echo esc_html( reset_content( 'inicio', 'space_addr2' ) ); ?></p>
                 </div>
             </div>
         </div>
@@ -133,17 +122,17 @@ if ( defined( 'RESET_COMING_SOON_MODE' ) && RESET_COMING_SOON_MODE ) {
     <div class="rhythm-grid">
         <div class="rhythm-item rhythm-text-block">
             <div class="rhythm-text-content">
-                <h2 class="font-serif">(re)set<br>your rhythm</h2>
-                <p class="font-mono">Premium matcha<br>for mindfull moments</p>
+                <h2 class="font-serif"><?php echo wp_kses_post( reset_content( 'inicio', 'rhythm_title' ) ); ?></h2>
+                <p class="font-mono"><?php echo wp_kses_post( reset_content( 'inicio', 'rhythm_sub' ) ); ?></p>
             </div>
         </div>
 
         <div class="rhythm-item rhythm-image rhythm-img-lifestyle">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/sc-rhythm-1.png" alt="Enjoying Reset Matcha">
+            <img src="<?php echo esc_url( reset_content( 'inicio', 'rhythm_img1' ) ); ?>" alt="Enjoying Reset Matcha">
         </div>
 
         <div class="rhythm-item rhythm-image rhythm-img-cheers">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/sc-rhythm-2.png" alt="Sharing Reset Matcha">
+            <img src="<?php echo esc_url( reset_content( 'inicio', 'rhythm_img2' ) ); ?>" alt="Sharing Reset Matcha">
         </div>
     </div>
 </section>

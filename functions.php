@@ -3,7 +3,7 @@
 // ── Versión del tema ────────────────────────────────────────────────────────
 // Para actualizar: sube la nueva versión aquí Y en style.css, luego
 // actualiza también el archivo update.json en tu servidor.
-define( 'RESET_THEME_VERSION', '1.0.1' );
+define( 'RESET_THEME_VERSION', '1.0.5' );
 define( 'RESET_THEME_DB_VERSION', '2.0.0' );
 
 // Modo Coming Soon temporal para la portada.
@@ -277,6 +277,9 @@ function reset_enqueue_scripts() {
     wp_enqueue_script( 'jquery' );
 }
 add_action( 'wp_enqueue_scripts', 'reset_enqueue_scripts' );
+
+// ── Contenidos editables por página (sidebar admin) ───────────────────────────
+require_once get_template_directory() . '/inc/content-options.php';
 
 // ── Menú en el backoffice ────────────────────────────────────────────────────
 function reset_admin_menu() {

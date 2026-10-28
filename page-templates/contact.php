@@ -6,47 +6,49 @@
 
 <?php get_header(); ?>
 
+<?php $find_items = reset_parse_lines( reset_content( 'contact', 'find_items' ), 2 ); ?>
+
 <div class="site-wrapper">
   <?php get_template_part( 'components/hero', null, [
     'case'        => 3,
-    'pretitle'    => '---Let\'s talk',
-    'title'       => 'Give us a call.',
-    'description' => 'Reservations, collaborations press - or just a hello. We answer fast.',
-    'bg_url'      => get_template_directory_uri() . '/assets/images/bg-contact.png'
+    'pretitle'    => reset_content( 'contact', 'hero_pretitle' ),
+    'title'       => reset_content( 'contact', 'hero_title' ),
+    'description' => reset_content( 'contact', 'hero_desc' ),
+    'bg_url'      => reset_content( 'contact', 'hero_bg' ),
 ]); ?>
-  
+
 </div>
 <section class="contact-info-section">
     <div class="contact-grid">
         <div class="contact-col">
             <span class="contact-label font-mono">Visit</span>
             <div class="contact-data font-serif">
-                <p>C/ Casanova 189</p>
-                <p>Barcelona</p>
+                <p><?php echo esc_html( reset_content( 'contact', 'visit_addr1' ) ); ?></p>
+                <p><?php echo esc_html( reset_content( 'contact', 'visit_addr2' ) ); ?></p>
             </div>
-            <a href="#" class="contact-link font-mono">view map →</a>
+            <a href="<?php echo esc_url( reset_content( 'contact', 'visit_url' ) ); ?>" class="contact-link font-mono"><?php echo esc_html( reset_content( 'contact', 'visit_link' ) ); ?></a>
         </div>
 
         <div class="contact-col">
             <span class="contact-label font-mono">Hours</span>
             <div class="contact-data font-serif">
-                <p>Mon - Fri: <i>08-19</i></p>
-                <p>Sat: <i>10-17</i></p>
-                <p>Sun: <i>closed</i></p>
+                <p><?php echo wp_kses_post( reset_content( 'contact', 'hours_1' ) ); ?></p>
+                <p><?php echo wp_kses_post( reset_content( 'contact', 'hours_2' ) ); ?></p>
+                <p><?php echo wp_kses_post( reset_content( 'contact', 'hours_3' ) ); ?></p>
             </div>
         </div>
 
         <div class="contact-col">
             <span class="contact-label font-mono">Email</span>
             <div class="contact-data font-serif">
-                <p><a href="mailto:info@resetmatchabar.com">info@resetmatchabar.com</a></p>
+                <p><a href="mailto:<?php echo esc_attr( reset_content( 'contact', 'email' ) ); ?>"><?php echo esc_html( reset_content( 'contact', 'email' ) ); ?></a></p>
             </div>
         </div>
 
         <div class="contact-col">
             <span class="contact-label font-mono">Social</span>
             <div class="contact-data font-serif">
-                <p><a href="https://instagram.com/resetmatchabar" target="_blank">@resetmatchabar</a></p>
+                <p><a href="<?php echo esc_url( reset_content( 'contact', 'social_url' ) ); ?>" target="_blank"><?php echo esc_html( reset_content( 'contact', 'social' ) ); ?></a></p>
             </div>
         </div>
     </div>
@@ -55,12 +57,12 @@
 <section class="contact-form-section">
     <div class="contact-form-grid">
         <div class="contact-form-image">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/matcha-whisk.png" alt="Matcha preparation">
+            <img src="<?php echo esc_url( reset_content( 'contact', 'form_img' ) ); ?>" alt="Matcha preparation">
         </div>
 
         <div class="contact-form-content">
             <div class="form-wrapper">
-                <h2 class="font-serif">Send us a message</h2>
+                <h2 class="font-serif"><?php echo esc_html( reset_content( 'contact', 'form_title' ) ); ?></h2>
 
                 <form action="#" class="reset-form" id="contactForm">
                     <div style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden;" aria-hidden="true">
@@ -109,34 +111,24 @@
     <div class="find-us-grid">
         <div class="find-us-content">
             <div class="find-us-wrapper">
-                <span class="font-mono find-us-label">--- How to find us</span>
-                <h2 class="font-serif">L'Eixample esquerra, closely to Frances Macià Square.</h2>
+                <span class="font-mono find-us-label"><?php echo esc_html( reset_content( 'contact', 'find_label' ) ); ?></span>
+                <h2 class="font-serif"><?php echo esc_html( reset_content( 'contact', 'find_title' ) ); ?></h2>
 
                 <div class="transport-list font-mono">
+                    <?php foreach ( $find_items as $t ) : ?>
                     <div class="transport-item">
-                        <span class="transport-type">Metro</span>
-                        <span class="transport-detail">L5 - Hospital Clínic - 10min</span>
+                        <span class="transport-type"><?php echo esc_html( $t[0] ); ?></span>
+                        <span class="transport-detail"><?php echo esc_html( $t[1] ); ?></span>
                     </div>
-                    <div class="transport-item">
-                        <span class="transport-type">Bus</span>
-                        <span class="transport-detail">Francesc Macià - 7, 33, 34, H8 - 2 min</span>
-                    </div>
-                    <div class="transport-item">
-                        <span class="transport-type">Bike</span>
-                        <span class="transport-detail">Bicing C/ Londres 53 - 3 min.</span>
-                    </div>
-                    <div class="transport-item">
-                        <span class="transport-type">Parking</span>
-                        <span class="transport-detail">Carrer de Buenos Aires 33. 2 min</span>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
 
-                <a href="#" class="view-link font-mono">view map →</a>
+                <a href="<?php echo esc_url( reset_content( 'contact', 'find_url' ) ); ?>" class="view-link font-mono"><?php echo esc_html( reset_content( 'contact', 'find_link' ) ); ?></a>
             </div>
         </div>
 
         <div class="find-us-image">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/matcha-cans.png" alt="Reset Matcha Cans">
+            <img src="<?php echo esc_url( reset_content( 'contact', 'find_img' ) ); ?>" alt="Reset Matcha Cans">
         </div>
     </div>
 </section>

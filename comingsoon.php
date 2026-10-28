@@ -325,12 +325,11 @@
   <div class="a-grid">
     <div class="a-left">
       <div>
-        <div class="a-eyebrow">Functional Matcha Bar · Barcelona</div>
-        <div class="a-headline">Born to elevate.</div>
+        <div class="a-eyebrow"><?php echo esc_html( reset_content( 'coming', 'eyebrow' ) ); ?></div>
+        <div class="a-headline"><?php echo esc_html( reset_content( 'coming', 'headline' ) ); ?></div>
       </div>
       <div class="a-bottom">
-        <p class="a-tagline">A functional matcha bar built<br>
-          for people who want to feel better every day.
+        <p class="a-tagline"><?php echo nl2br( esc_html( reset_content( 'coming', 'tagline' ) ) ); ?>
         </p>
         <form class="a-form" id="resetForm">
           <!-- Honeypot: visible solo para bots -->
@@ -346,26 +345,25 @@
           <button type="submit" class="a-btn">Join (re)set →</button>
         </form>
         <div id="successMsg" class="success-msg">
-          <em>Welcome — you’re officially part of the (re)set community. </em><br>
-          We’re getting everything ready behind the scenes.<br>
-          See you very soon.<br><br>
-          <span style="opacity:.6">Follow us @resetmatchabar</span>
+          <em><?php echo esc_html( reset_content( 'coming', 'success_title' ) ); ?> </em><br>
+          <?php echo nl2br( esc_html( reset_content( 'coming', 'success_text' ) ) ); ?><br><br>
+          <span style="opacity:.6">Follow us <?php echo esc_html( reset_content( 'coming', 'social' ) ); ?></span>
         </div>
       </div>
     </div>
     <div class="a-right">
       <video autoplay muted loop playsinline class="a-right-video-desktop">
-        <source src="<?php echo get_template_directory_uri(); ?>/assets/images/bg-home.mov" type="video/mp4">
+        <source src="<?php echo esc_url( reset_content( 'coming', 'video_desktop' ) ); ?>" type="video/mp4">
         Tu navegador no soporta videos.
       </video>
       <video autoplay muted loop playsinline class="a-right-video-mobile">
-        <source src="<?php echo get_template_directory_uri(); ?>/assets/images/bg-home-mobile.mov" type="video/mp4">
+        <source src="<?php echo esc_url( reset_content( 'coming', 'video_mobile' ) ); ?>" type="video/mp4">
         Tu navegador no soporta videos.
       </video>
       <div class="a-info">
-        <div class="a-location">Opening soon</div>
-        <div class="a-address">C/ Casanova 189<br>Barcelona</div>
-        <div class="a-social"><a href="https://www.instagram.com/resetmatchabar" target="_blank" class="a-info">@resetmatchabar</a></div>
+        <div class="a-location"><?php echo esc_html( reset_content( 'coming', 'location' ) ); ?></div>
+        <div class="a-address"><?php echo nl2br( esc_html( reset_content( 'coming', 'address' ) ) ); ?></div>
+        <div class="a-social"><a href="<?php echo esc_url( reset_content( 'coming', 'social_url' ) ); ?>" target="_blank" class="a-info"><?php echo esc_html( reset_content( 'coming', 'social' ) ); ?></a></div>
       </div> 
     </div>
   </div>

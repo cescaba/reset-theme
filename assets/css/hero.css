@@ -61,7 +61,7 @@
 }
 
 .hero-case-1 .hero-content-container {
-    padding-top: 55px;
+    padding-top: 136px;
 }
 
 .hero-case-1 .hero-overlay {
@@ -166,7 +166,7 @@
 
 @media (max-width: 1024px) {
     .hero-case-1 .hero-content-container {
-        padding-top: 45px;
+        padding-top: 124px;
     }
 
     .hero-case-3 .hero-bg {
@@ -198,7 +198,7 @@
 @media (max-width: 768px) {
 
     .hero-case-1 .hero-content-container {
-        padding-top: 30px;
+        padding-top: 112px;
     }
 
     .hero-case-1 .hero-video-desktop {
