@@ -23,4 +23,5 @@
 .reset-product-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; }
 .reset-product-top strong { color:#223E36; }
 .reset-product-row label { font-weight:600; color:#223E36; font-size:12.5px; margin-top:4px; }
+.reset-field .wp-editor-wrap { width:100%; }
 @media (max-width:800px){ .reset-grid{grid-template-columns:1fr;} }

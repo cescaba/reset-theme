@@ -27,7 +27,7 @@ $grid_items  = function_exists( 'reset_get_grid_products' ) ? reset_get_grid_pro
 <section class="info-split">
     <div class="info-text-block">
         <h2 class="info-title font-serif">
-            <?php echo esc_html( reset_content( 'inicio', 'info_title' ) ); ?>
+            <?php echo nl2br( esc_html( reset_content( 'inicio', 'info_title' ) ) ); ?>
         </h2>
     </div>
 

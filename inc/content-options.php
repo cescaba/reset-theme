@@ -132,10 +132,37 @@ function reset_content( $group, $key, $fallback = '' ) {
 	$defaults = reset_content_defaults();
 	$def = $defaults[ $group ][ $key ] ?? $fallback;
 	$opt = get_option( 'reset_content_' . $group, [] );
-	if ( isset( $opt[ $key ] ) && $opt[ $key ] !== '' ) {
-		return $opt[ $key ];
+	$val = ( isset( $opt[ $key ] ) && $opt[ $key ] !== '' ) ? $opt[ $key ] : $def;
+	// Los campos 'html' se imprimen dentro de h1/h2/p: convertimos bloques
+	// <p>…</p> en <br> para que los saltos ya guardados sigan funcionando.
+	if ( is_string( $val ) && reset_content_field_type( $group, $key ) === 'html' ) {
+		$val = reset_inline_html( $val );
 	}
-	return $def;
+	return $val;
+}
+
+function reset_content_field_type( $group, $key ) {
+	$schema = reset_content_schema();
+	foreach ( ( $schema[ $group ]['sections'] ?? [] ) as $fields ) {
+		foreach ( $fields as $f ) {
+			if ( ( $f['key'] ?? '' ) === $key ) return $f['type'] ?? 'text';
+		}
+	}
+	return 'text';
+}
+
+// "<p>a</p><p>b</p>" -> "a<br>b" ; "a\nb" -> "a<br>b" (campos inline en titulares).
+function reset_inline_html( $html ) {
+	$html = (string) $html;
+	if ( strpos( $html, '<p' ) !== false ) {
+		$html = preg_replace( '#</p>\s*<p[^>]*>#i', '<br>', $html );
+		$html = preg_replace( '#</?p[^>]*>#i', '', $html );
+	}
+	// Saltos literales (pestaña Texto o textarea): a <br> sin duplicar los que ya hay.
+	$html = preg_replace( '#(<br\s*/?>)\s*\r?\n#i', '$1', $html );
+	$html = preg_replace( "#\r?\n\s*(<br\s*/?>)#i", '$1', $html );
+	$html = preg_replace( "/\r\n|\r|\n/", '<br>', $html );
+	return trim( $html );
 }
 
 // Parsea líneas "Nombre | Descripción | Imagen"
@@ -238,7 +265,7 @@ function reset_content_schema() {
 			'desc'  => 'Textos, imágenes y vídeos de la portada (plantilla Inicio + front-page).',
 			'sections' => [
 				'Hero' => [
-					[ 'key' => 'hero_title', 'label' => 'Título hero', 'type' => 'html', 'desc' => 'Permite &lt;br&gt; e &lt;i&gt;.' ],
+					[ 'key' => 'hero_title', 'label' => 'Título hero', 'type' => 'html', 'desc' => 'Usa la barra del editor para saltos de línea, cursiva, etc.' ],
 					[ 'key' => 'hero_desc', 'label' => 'Descripción hero', 'type' => 'text' ],
 					[ 'key' => 'hero_video', 'label' => 'Vídeo escritorio', 'type' => 'video' ],
 					[ 'key' => 'hero_video_mobile', 'label' => 'Vídeo móvil', 'type' => 'video' ],
@@ -447,7 +474,10 @@ function reset_content_sanitize( $value, $group ) {
 			}
 			$clean[ $k ] = $items;
 		} elseif ( in_array( $type, [ 'html' ], true ) ) {
-			$clean[ $k ] = wp_kses_post( $v );
+			// Editor visual (TinyMCE): negrita, cursiva, subrayado… sin escribir HTML.
+			// Como en las entradas: con 'unfiltered_html' se guarda tal cual,
+			// si no se filtra con wp_kses_post.
+			$clean[ $k ] = current_user_can( 'unfiltered_html' ) ? $v : wp_kses_post( $v );
 		} elseif ( in_array( $type, [ 'image', 'video' ], true ) ) {
 			$clean[ $k ] = esc_url_raw( trim( (string) $v ) );
 		} elseif ( in_array( $type, [ 'textarea', 'textarea_lines' ], true ) ) {
@@ -593,8 +623,26 @@ function reset_content_render_page( $group ) {
 								<textarea name="<?php echo $name; ?>" rows="3"><?php echo esc_textarea( $val ); ?></textarea>
 							<?php elseif ( $f['type'] === 'textarea_lines' ) : ?>
 								<textarea name="<?php echo $name; ?>" rows="5" class="mono"><?php echo esc_textarea( $val ); ?></textarea>
-							<?php elseif ( $f['type'] === 'html' ) : ?>
-								<textarea name="<?php echo $name; ?>" rows="2"><?php echo esc_textarea( $val ); ?></textarea>
+							<?php elseif ( $f['type'] === 'html' ) :
+								// Editor visual (TinyMCE): negrita, cursiva, subrayado… sin escribir etiquetas.
+								$editor_id = 'reset_' . preg_replace( '/[^a-z0-9_]/', '', strtolower( $group . '_' . $f['key'] ) );
+								wp_editor( (string) $val, $editor_id, [
+									'textarea_name' => $name,
+									'textarea_rows' => 4,
+									'media_buttons' => false,
+									'teeny'         => true,
+									'quicktags'     => true,
+									'tinymce'       => [
+										'toolbar1'            => 'bold,italic,underline,strikethrough,bullist,numlist,link,unlink,undo,redo,removeformat',
+										// Estos campos se imprimen dentro de h1/h2/p: Enter debe
+										// crear <br> (como antes), no bloques <p> que romperían el titular.
+										'forced_root_block'   => false,
+										'force_p_newlines'    => false,
+										'force_br_newlines'   => true,
+										'convert_newlines_to_brs' => true,
+									],
+								] );
+							?>
 							<?php elseif ( $is_media ) : ?>
 								<div class="reset-media-row">
 									<input type="url" name="<?php echo $name; ?>" value="<?php echo esc_attr( $val ); ?>" placeholder="https://…" class="regular-text reset-media-url">
