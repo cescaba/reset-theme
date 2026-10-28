@@ -74,7 +74,7 @@ $grid_items  = function_exists( 'reset_get_grid_products' ) ? reset_get_grid_pro
                 <button class="grid-arrow prev" id="gridPrev">←</button>
                 <button class="grid-arrow next" id="gridNext">→</button>
             </div>
-            <a href="<?php echo esc_url( reset_content( 'inicio', 'grid_link_url' ) ); ?>" class="full-menu-link font-diatype"><?php echo esc_html( reset_content( 'inicio', 'grid_link_text' ) ); ?></a>
+            <a href="<?php echo esc_url( reset_menu_href( reset_content( 'inicio', 'grid_link_url' ) ) ); ?>"<?php echo reset_menu_link_attrs(); ?> class="full-menu-link font-diatype"><?php echo esc_html( reset_content( 'inicio', 'grid_link_text' ) ); ?></a>
         </div>
 
         <div class="products-scroll-wrapper" id="productGrid">
