@@ -120,6 +120,7 @@ function reset_content_defaults() {
 			'success_text'  => "We’re getting everything ready behind the scenes.\nSee you very soon.",
 		],
 		'global' => [
+			'coming_soon'   => '1',
 			'menu_file'     => '',
 			'footer_title'  => 'Lets (re)set',
 			'footer_social' => 'Follow us @resetmatchabar',
@@ -256,6 +257,11 @@ function reset_menu_target_url( $url ) {
 		return $url;
 	}
 	return home_url( $url );
+}
+
+// ¿Está activo el modo Coming Soon? (Contenidos → Global → Activar Coming Soon)
+function reset_coming_soon_active() {
+	return (string) reset_content( 'global', 'coming_soon' ) === '1';
 }
 
 // Carta subida desde Medios (PDF o imagen). Si existe, los botones "Our menú"
@@ -435,6 +441,9 @@ function reset_content_schema() {
 			'title' => 'Global (header/footer)',
 			'desc'  => 'Textos comunes a todo el sitio.',
 			'sections' => [
+				'Modo Coming Soon' => [
+					[ 'key' => 'coming_soon', 'label' => 'Activar Coming Soon', 'type' => 'toggle', 'desc' => 'Si está activado, la portada (/) muestra la página Coming Soon en vez de la web. Los textos de esa página se editan en (re)set · Contenidos → Coming Soon.' ],
+				],
 				'Carta (botón "Our menú")' => [
 					[ 'key' => 'menu_file', 'label' => 'Archivo de la carta', 'type' => 'file', 'desc' => 'PDF o imagen de la biblioteca de Medios. Se abre en una pestaña nueva al pulsar "Our menú" (header y botones de menú). Si está vacío, los botones llevan a la sección de productos de Inicio.' ],
 				],
@@ -492,6 +501,8 @@ function reset_content_sanitize( $value, $group ) {
 				if ( count( $items ) >= 6 ) break;
 			}
 			$clean[ $k ] = $items;
+		} elseif ( $type === 'toggle' ) {
+			$clean[ $k ] = ( (string) $v === '1' ) ? '1' : '0';
 		} elseif ( in_array( $type, [ 'html' ], true ) ) {
 			// Editor visual (TinyMCE): negrita, cursiva, subrayado… sin escribir HTML.
 			// Como en las entradas: con 'unfiltered_html' se guarda tal cual,
@@ -676,6 +687,9 @@ function reset_content_render_page( $group ) {
 										<video src="<?php echo esc_url( $val ); ?>" class="reset-preview" muted playsinline></video>
 									<?php endif; ?>
 								<?php endif; ?>
+							<?php elseif ( $f['type'] === 'toggle' ) : ?>
+								<input type="hidden" name="<?php echo $name; ?>" value="0">
+								<label><input type="checkbox" name="<?php echo $name; ?>" value="1" <?php checked( (string) $val, "1" ); ?>> Mostrar la página Coming Soon en la portada</label>
 							<?php else : ?>
 								<input type="text" name="<?php echo $name; ?>" value="<?php echo esc_attr( $val ); ?>" class="regular-text">
 							<?php endif; ?>

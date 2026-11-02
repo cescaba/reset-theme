@@ -1,4 +1,10 @@
 <?php
+// Modo Coming Soon: se activa/desactiva en Contenidos → Global.
+if ( reset_coming_soon_active() ) {
+    include get_template_directory() . '/comingsoon.php';
+    return;
+}
+
 // Portada: usa los contenidos del grupo "Inicio" del admin.
 ?>
 

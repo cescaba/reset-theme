@@ -6,9 +6,6 @@
 define( 'RESET_THEME_VERSION', '1.0.10' );
 define( 'RESET_THEME_DB_VERSION', '2.0.0' );
 
-// Modo Coming Soon temporal para la portada.
-define( 'RESET_COMING_SOON_MODE', true);
-
 // URL del JSON de actualizaciones — cámbiala por la tuya antes de desplegar.
 // El archivo update.json debe estar accesible públicamente.
 // Formato del JSON: ver comentario al final de este archivo.
