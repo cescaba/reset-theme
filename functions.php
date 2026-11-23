@@ -278,6 +278,12 @@ add_action( 'wp_enqueue_scripts', 'reset_enqueue_scripts' );
 // ── Contenidos editables por página (sidebar admin) ───────────────────────────
 require_once get_template_directory() . '/inc/content-options.php';
 
+// ── Acceso oculto al backoffice (/explore) ───────────────────────────────────
+require_once get_template_directory() . '/inc/hide-admin.php';
+
+// ── Bloqueo de enumeración de usuarios (REST, ?author=, login…) ──────────────
+require_once get_template_directory() . '/inc/block-user-enum.php';
+
 // ── Menú en el backoffice ────────────────────────────────────────────────────
 function reset_admin_menu() {
     add_menu_page(
