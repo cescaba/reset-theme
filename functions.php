@@ -284,6 +284,9 @@ require_once get_template_directory() . '/inc/hide-admin.php';
 // ── Bloqueo de enumeración de usuarios (REST, ?author=, login…) ──────────────
 require_once get_template_directory() . '/inc/block-user-enum.php';
 
+// ── Manual de uso (/manual/, solo con sesión) ────────────────────────────────
+require_once get_template_directory() . '/inc/manual.php';
+
 // ── Menú en el backoffice ────────────────────────────────────────────────────
 function reset_admin_menu() {
     add_menu_page(

@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Manual de uso: Reset Matcha Bar</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Paleta de VC Studio: navy como primario, azul eléctrico como resalte, cinco colores de acento */
+  --navy: #110BA1;
+  --navy-ink: #0D0879;
+  --electric: #0000FE;
+  --blue: #0058DD;
+  --blue-tint: #E6EEFC;
+  --pink: #E22C69;
+  --purple: #6327E9;
+  --yellow: #FFC233;
+  --ink: #2F2F2F;
+  --strong: #000000;
+  --muted: #7F7F7F;
+  --line: #E7E6E6;
+  --panel: #F3F4F6;
+  --white: #FFFFFF;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Poppins", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--white);
+}
+.wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+a { color: var(--navy); text-decoration: underline; text-underline-offset: 3px; }
+a:hover { color: var(--electric); }
+a:focus-visible { outline: 2px solid var(--electric); outline-offset: 2px; }
+p { margin: 0 0 14px; max-width: 68ch; }
+strong { font-weight: 600; color: var(--strong); }
+code {
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 0.92em;
+  background: var(--panel);
+  padding: 1px 6px;
+  border-radius: 4px;
+  color: var(--strong);
+}
+
+/* Portada */
+.cover { background: var(--navy); color: var(--white); padding: 72px 0 64px; }
+.eyebrow {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0;
+}
+.cover .eyebrow { color: rgba(255, 255, 255, 0.85); }
+.cover h1 {
+  font-weight: 600;
+  font-size: 38px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin: 18px 0 14px;
+  text-wrap: balance;
+  max-width: 22ch;
+}
+.lead { font-size: 19px; line-height: 1.5; margin: 0 0 22px; max-width: 46ch; }
+.meta { font-size: 14px; margin: 0; opacity: 0.85; }
+
+/* Índice */
+.index { padding: 40px 0 8px; }
+.index ol { list-style: none; padding: 0; margin: 14px 0 0; display: grid; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.index li { display: flex; gap: 12px; align-items: baseline; }
+.index .n { font-weight: 600; color: var(--electric); font-size: 14px; min-width: 22px; }
+.index a { color: var(--strong); text-decoration: none; }
+.index a:hover { color: var(--electric); text-decoration: underline; }
+
+/* Secciones: barra superior de 6px en un color de la paleta */
+.block {
+  border-top: 6px solid var(--accent, var(--navy));
+  margin: 40px 0 0;
+  padding: 32px 0 48px;
+}
+.block h2 {
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 1.2;
+  color: var(--strong);
+  margin: 0 0 18px;
+  text-wrap: balance;
+  display: flex;
+  gap: 14px;
+  align-items: baseline;
+}
+.block h2 .num { font-size: 14px; letter-spacing: 0.08em; color: var(--muted); font-weight: 500; }
+.block h3 {
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--strong);
+  margin: 30px 0 10px;
+  text-wrap: balance;
+}
+
+/* Viñetas cuadradas, como el marcador de la marca */
+ul.sq { list-style: none; padding: 0; margin: 0 0 14px; }
+ul.sq li { position: relative; padding-left: 24px; margin: 0 0 8px; max-width: 68ch; }
+ul.sq li::before { content: "\25A0"; position: absolute; left: 0; top: 0; color: var(--accent, var(--navy)); font-size: 13px; line-height: 1.9; }
+
+/* Imágenes: esquinas de 8px, filete de 1px */
+figure { margin: 24px 0 26px; }
+figure img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+figcaption { font-size: 14px; color: var(--muted); margin-top: 8px; }
+
+/* Avisos: panel gris con barra superior amarilla */
+.note {
+  background: var(--panel);
+  border-top: 6px solid var(--yellow);
+  padding: 18px 22px;
+  margin: 22px 0;
+  max-width: 68ch;
+}
+.note p { margin: 0; }
+.note strong { display: block; margin-bottom: 4px; }
+
+/* Pie */
+.foot { border-top: 1px solid var(--line); padding: 28px 0 40px; font-size: 14px; color: var(--muted); }
+.foot .brand { font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--navy); }
+.foot p { margin: 4px 0 0; }
+
+@media (max-width: 560px) {
+  body { font-size: 16px; }
+  .cover { padding: 48px 0 44px; }
+  .cover h1 { font-size: 30px; }
+  .block h2 { font-size: 24px; }
+  .block { padding-bottom: 36px; }
+}
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <div class="wrap">
+    <p class="eyebrow">VC Studio · Desarrolladora digital</p>
+    <h1>Manual de uso para actualizar la web de Reset Matcha Bar</h1>
+    <p class="lead">Cómo cambiar textos, imágenes y vídeos desde el panel de WordPress. No hace falta saber programar.</p>
+    <p class="meta">Actualizado el 23 de noviembre de 2026</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <nav class="index" aria-label="Índice">
+    <p class="eyebrow">Índice</p>
+    <ol>
+      <li><span class="n">01</span><a href="#antes">Antes de empezar</a></li>
+      <li><span class="n">02</span><a href="#inicio">Inicio</a></li>
+      <li><span class="n">03</span><a href="#our-story">Our Story</a></li>
+      <li><span class="n">04</span><a href="#contacto">Contacto</a></li>
+      <li><span class="n">05</span><a href="#coming-soon">Coming Soon</a></li>
+      <li><span class="n">06</span><a href="#global">Global (cabecera y pie)</a></li>
+      <li><span class="n">07</span><a href="#avisos">Buenas prácticas y avisos</a></li>
+    </ol>
+  </nav>
+
+  <section id="antes" class="block" style="--accent: var(--pink)">
+    <h2><span class="num">01</span>Antes de empezar</h2>
+    <p>Este manual explica cómo cambiar textos, imágenes y vídeos de la web de Reset Matcha Bar. No hace falta saber programar.</p>
+    <ul class="sq">
+      <li>Entra en la web con tu usuario en <code>resetmatchabar.com/explore</code>.</li>
+      <li>En el menú de la izquierda, abre <strong>(re)set · Contenidos</strong>. Tiene cinco pantallas: Inicio, Our Story, Contacto, Coming Soon y Global.</li>
+      <li>Cada pantalla tiene varios bloques. Cambia solo los campos que necesites.</li>
+      <li>Pulsa <strong>Guardar cambios</strong> al terminar. Si sales sin guardar, perderás los cambios.</li>
+      <li>Después de guardar, abre la web en otra pestaña y revisa el resultado.</li>
+    </ul>
+    <p>Los campos <strong>Subir / elegir</strong> abren la biblioteca de Medios. Puedes elegir una imagen o vídeo ya subido, o subir uno nuevo.</p>
+    <p>Los campos <strong>Visual</strong> tienen una barra de formato para negrita, cursiva o saltos de línea. Evita la pestaña <strong>Código</strong> salvo que alguien te lo pida.</p>
+    <figure>
+      <img src="shots/coming-soon.jpg" alt="Panel de WordPress con el menú (re)set · Contenidos desplegado: Inicio, Our Story, Contacto, Coming Soon y Global">
+      <figcaption>Menú (re)set · Contenidos en el panel de WordPress.</figcaption>
+    </figure>
+  </section>
+
+  <section id="inicio" class="block" style="--accent: var(--blue)">
+    <h2><span class="num">02</span>Inicio</h2>
+    <p>Esta pantalla edita la portada de la web, de arriba abajo.</p>
+    <figure>
+      <img src="shots/inicio.jpg" alt="Pantalla Inicio del panel de (re)set con los campos del bloque Hero">
+      <figcaption>Pantalla Inicio: bloque Hero.</figcaption>
+    </figure>
+
+    <h3>Hero</h3>
+    <ul class="sq">
+      <li><strong>Título hero:</strong> el titular principal. Usa la barra del editor para saltos de línea.</li>
+      <li><strong>Descripción hero:</strong> el texto corto debajo del titular.</li>
+      <li><strong>Vídeo escritorio</strong> y <strong>Vídeo móvil:</strong> el vídeo de cabecera en cada tipo de pantalla. Sube uno para cada versión.</li>
+    </ul>
+
+    <h3>Frase e imágenes</h3>
+    <ul class="sq">
+      <li><strong>Frase principal:</strong> el texto destacado de esta sección.</li>
+      <li><strong>Imagen 1</strong> e <strong>Imagen 2:</strong> las dos imágenes de la sección.</li>
+    </ul>
+
+    <h3>Signature drinks</h3>
+    <ul class="sq">
+      <li><strong>Título sección:</strong> el encabezado de la sección.</li>
+      <li><strong>Bebidas signature:</strong> escribe una bebida por línea con este formato: <code>Nombre | Descripción</code>. Cada línea aparece como una bebida. No dejes líneas vacías entre ellas.</li>
+    </ul>
+
+    <h3>Grid de productos</h3>
+    <ul class="sq">
+      <li><strong>Título grid</strong> y <strong>Descripción grid:</strong> el encabezado y el texto de introducción.</li>
+      <li><strong>Texto enlace</strong> y <strong>URL enlace:</strong> el botón que lleva a otra página. Pega la dirección completa, con https://.</li>
+      <li><strong>Productos:</strong> hay cuatro. Cada uno tiene nombre, descripción e imagen.</li>
+      <li>Para añadir un producto, pulsa <strong>+ Añadir producto</strong>. Para quitarlo, pulsa <strong>Quitar</strong> en su bloque.</li>
+    </ul>
+
+    <h3>Espacio</h3>
+    <ul class="sq">
+      <li><strong>Etiqueta</strong> y <strong>Título:</strong> el encabezado de la sección.</li>
+      <li><strong>Dirección línea 1</strong> y <strong>Dirección línea 2:</strong> la dirección del local.</li>
+      <li><strong>Imagen espacio:</strong> la fotografía del local.</li>
+      <li><strong>Texto “view map”</strong> y <strong>URL mapa:</strong> el botón que abre el mapa.</li>
+    </ul>
+
+    <h3>Rhythm</h3>
+    <ul class="sq">
+      <li><strong>Título</strong> y <strong>Subtítulo:</strong> los textos de la sección.</li>
+      <li><strong>Imagen 1</strong> e <strong>Imagen 2:</strong> las dos imágenes de la sección.</li>
+    </ul>
+  </section>
+
+  <section id="our-story" class="block" style="--accent: var(--purple)">
+    <h2><span class="num">03</span>Our Story</h2>
+    <p>Esta pantalla edita la página que cuenta la historia y los valores de Reset.</p>
+    <figure>
+      <img src="shots/our-story.jpg" alt="Pantalla Our Story del panel de (re)set con los campos del bloque Hero">
+      <figcaption>Pantalla Our Story: bloque Hero.</figcaption>
+    </figure>
+
+    <h3>Hero</h3>
+    <ul class="sq">
+      <li><strong>Título</strong>, <strong>Descripción</strong> y <strong>Texto inferior:</strong> los textos principales de la cabecera.</li>
+      <li><strong>Imagen fondo:</strong> la imagen de fondo de la cabecera.</li>
+    </ul>
+
+    <h3>Rituals</h3>
+    <ul class="sq">
+      <li><strong>Subtítulo</strong>, <strong>Título</strong> y <strong>Descripción:</strong> los textos de la sección.</li>
+    </ul>
+
+    <h3>Way</h3>
+    <ul class="sq">
+      <li><strong>Imagen</strong>, <strong>Título</strong> y <strong>Descripción:</strong> el contenido del bloque.</li>
+      <li><strong>Texto botón</strong> y <strong>URL botón:</strong> el botón y su enlace.</li>
+    </ul>
+
+    <h3>Purpose</h3>
+    <ul class="sq">
+      <li><strong>Etiqueta</strong> y <strong>Título:</strong> el encabezado de la sección.</li>
+      <li><strong>Columna 1</strong>, <strong>Columna 2</strong> y <strong>Columna 3:</strong> el texto de cada columna.</li>
+      <li><strong>Imagen fondo:</strong> la imagen de fondo de la sección.</li>
+    </ul>
+
+    <h3>Beliefs</h3>
+    <ul class="sq">
+      <li><strong>Subtítulo</strong> y <strong>Creencias:</strong> el encabezado de la sección.</li>
+      <li>Hay tres creencias. Cada una tiene <strong>Título</strong>, <strong>Descripción</strong> e <strong>Icono</strong>. El icono se elige desde Medios.</li>
+      <li>Para añadir una creencia, pulsa <strong>+ Añadir creencia</strong>. Para quitarla, pulsa <strong>Quitar</strong> en su bloque.</li>
+    </ul>
+
+    <h3>Comunidad y espacio</h3>
+    <ul class="sq">
+      <li><strong>Fondo comunidad</strong> y <strong>Fondo espacio:</strong> las imágenes de fondo de cada bloque.</li>
+      <li>Cada bloque tiene <strong>Etiqueta</strong>, <strong>Título</strong>, <strong>Descripción</strong>, <strong>Botón</strong> y <strong>URL</strong>.</li>
+    </ul>
+
+    <h3>Promise</h3>
+    <ul class="sq">
+      <li><strong>Etiqueta</strong>, <strong>Título</strong> y <strong>Visual / Código:</strong> el texto de la sección. Usa la pestaña Visual.</li>
+      <li><strong>Botón</strong> y <strong>URL botón:</strong> el botón y su enlace.</li>
+      <li><strong>Fondo móvil:</strong> la imagen de fondo en pantallas pequeñas.</li>
+    </ul>
+  </section>
+
+  <section id="contacto" class="block" style="--accent: var(--electric)">
+    <h2><span class="num">04</span>Contacto</h2>
+    <p>Esta pantalla edita la página de contacto: dirección, horarios, correo y cómo llegar.</p>
+    <figure>
+      <img src="shots/contacto.jpg" alt="Pantalla Contacto del panel de (re)set con los campos del bloque Hero y la dirección">
+      <figcaption>Pantalla Contacto: bloque Hero e información.</figcaption>
+    </figure>
+
+    <h3>Hero</h3>
+    <ul class="sq">
+      <li><strong>Pretítulo</strong>, <strong>Título</strong> y <strong>Descripción:</strong> los textos de la cabecera.</li>
+      <li><strong>Imagen fondo:</strong> la imagen de fondo.</li>
+    </ul>
+
+    <h3>Información (visita, horarios, correo y redes)</h3>
+    <ul class="sq">
+      <li><strong>Dirección 1</strong> y <strong>Dirección 2:</strong> la dirección del local.</li>
+      <li><strong>Texto mapa</strong> y <strong>URL mapa:</strong> el texto y el enlace del mapa.</li>
+      <li><strong>Horario 1</strong>, <strong>Horario 2</strong> y <strong>Horario 3:</strong> los tramos horarios. Usa la pestaña Visual.</li>
+      <li><strong>Email:</strong> el correo de contacto.</li>
+      <li><strong>Social</strong> y <strong>URL social:</strong> el nombre de la red y su enlace.</li>
+    </ul>
+
+    <h3>Formulario</h3>
+    <ul class="sq">
+      <li><strong>Imagen lateral:</strong> la imagen que acompaña al formulario.</li>
+      <li><strong>Título formulario:</strong> el encabezado del formulario.</li>
+      <li>Esta pantalla no edita los campos del formulario. Solo cambia su imagen y su título.</li>
+    </ul>
+
+    <h3>Cómo llegar</h3>
+    <ul class="sq">
+      <li><strong>Etiqueta</strong> y <strong>Título:</strong> el encabezado de la sección.</li>
+      <li><strong>Transportes:</strong> escribe un medio por línea con este formato: <code>Tipo | Detalle</code>. Por ejemplo: <code>Metro | Línea y parada</code>.</li>
+      <li><strong>Texto enlace</strong> y <strong>URL enlace:</strong> el enlace de la sección.</li>
+      <li><strong>Imagen:</strong> la fotografía de la sección.</li>
+    </ul>
+  </section>
+
+  <section id="coming-soon" class="block" style="--accent: var(--yellow)">
+    <h2><span class="num">05</span>Coming Soon</h2>
+    <p>Esta pantalla edita la página temporal de apertura. Solo se ve en la portada si el modo Coming Soon está activado en la pantalla Global.</p>
+    <ul class="sq">
+      <li><strong>Eyebrow superior:</strong> el texto pequeño que aparece encima del titular.</li>
+      <li><strong>Titular grande</strong> y <strong>Texto bajo titular:</strong> el mensaje principal de la página.</li>
+      <li><strong>Vídeo escritorio</strong> y <strong>Vídeo móvil:</strong> el vídeo de fondo en cada tipo de pantalla.</li>
+      <li><strong>Etiqueta ubicación</strong>, <strong>Dirección</strong>, <strong>Instagram</strong> y <strong>URL Instagram:</strong> los datos del local y su red social.</li>
+      <li><strong>Mensaje éxito (título)</strong> y <strong>Mensaje éxito (texto):</strong> lo que ve la persona después de un envío correcto.</li>
+    </ul>
+  </section>
+
+  <section id="global" class="block" style="--accent: var(--navy)">
+    <h2><span class="num">06</span>Global (cabecera y pie)</h2>
+    <p>Esta pantalla tiene textos y ajustes comunes a todo el sitio. Cualquier cambio aquí se ve en todas las páginas.</p>
+    <figure>
+      <img src="shots/global.jpg" alt="Pantalla Global del panel de (re)set con el modo Coming Soon, la carta y el pie de página">
+      <figcaption>Pantalla Global: modo Coming Soon, carta y pie de página.</figcaption>
+    </figure>
+
+    <h3>Modo Coming Soon</h3>
+    <ul class="sq">
+      <li>Activa la casilla <strong>Mostrar la página Coming Soon en la portada</strong> para que la portada muestre la página de apertura en vez de la web.</li>
+      <li>Desmárcala para volver a mostrar la web.</li>
+    </ul>
+    <div class="note">
+      <strong>Atención</strong>
+      <p>Mientras la casilla esté marcada, cualquier visitante verá la página temporal. Actívala o quítala solo cuando esté decidido. Estado al preparar este manual: marcada.</p>
+    </div>
+
+    <h3>Carta (botón “Our menú”)</h3>
+    <ul class="sq">
+      <li>Pulsa <strong>Subir / elegir</strong> para elegir el PDF o la imagen de la carta desde Medios.</li>
+      <li>El archivo actual es <code>menu_reset.pdf</code>. Se abre en una pestaña nueva al pulsar el botón.</li>
+      <li>Si el campo queda vacío, el botón lleva a la sección de productos de Inicio.</li>
+    </ul>
+
+    <h3>Pie de página</h3>
+    <ul class="sq">
+      <li><strong>Título footer:</strong> el texto principal del pie. Ahora dice “Lets (re)set”.</li>
+      <li><strong>Texto social:</strong> la línea de redes sociales. Ahora dice “Follow us @resetmatchabar”.</li>
+      <li><strong>URL social:</strong> el enlace de Instagram.</li>
+    </ul>
+    <p>Pulsa <strong>Guardar cambios</strong> al terminar.</p>
+  </section>
+
+  <section id="avisos" class="block" style="--accent: var(--pink)">
+    <h2><span class="num">07</span>Buenas prácticas y avisos</h2>
+
+    <h3>Antes de cambiar algo</h3>
+    <ul class="sq">
+      <li>Anota el texto anterior. Así puedes volver atrás si hace falta.</li>
+      <li>Cambia una pantalla cada vez y guárdala antes de pasar a otra.</li>
+    </ul>
+
+    <h3>Qué afecta a toda la web</h3>
+    <ul class="sq">
+      <li><strong>Global:</strong> cualquier cambio aparece en todas las páginas.</li>
+      <li><strong>Modo Coming Soon:</strong> oculta la web real en la portada. Confirma con VC Studio antes de activarlo o desactivarlo.</li>
+    </ul>
+
+    <h3>Imágenes y vídeos</h3>
+    <ul class="sq">
+      <li>Usa archivos en formato web, como JPG, PNG o WebP, y con un tamaño razonable.</li>
+      <li>Ponles un nombre claro antes de subirlos, por ejemplo <code>carta-verano-2026.jpg</code>.</li>
+    </ul>
+
+    <h3>Revisión después de guardar</h3>
+    <ul class="sq">
+      <li>Abre la web en el móvil y en el ordenador.</li>
+      <li>Pulsa los botones y comprueba que llevan a la página correcta.</li>
+      <li>Lee los textos y revisa que no falte ninguna palabra.</li>
+    </ul>
+
+    <h3>Dudas</h3>
+    <ul class="sq">
+      <li>Para cualquier duda técnica, contacta con VC Studio. No cambies campos que no entiendas.</li>
+    </ul>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p class="brand">VC Studio</p>
+    <p>Manual preparado para el equipo de Reset Matcha Bar.</p>
+  </div>
+</footer>
+
+</body>
+</html>
