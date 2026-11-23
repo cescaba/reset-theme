@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var categoryField = form.querySelector('input[name="category"]:checked');
     var payload = {
-      action: 'reset_registro',
+      action: form.getAttribute('data-action') || 'reset_registro',
       nonce: resetAjax.nonce,
       nombre: form.elements['name'] ? form.elements['name'].value : '',
       email: form.elements['email'] ? form.elements['email'].value : '',

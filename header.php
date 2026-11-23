@@ -17,6 +17,7 @@
     $is_inicio  = is_front_page() || is_page_template( 'page-templates/inicio.php' );
     $is_story   = is_page_template( 'page-templates/our-story.php' ) || is_page( 'our-story' );
     $is_contact = is_page_template( 'page-templates/contact.php' ) || is_page( 'contact' );
+    $is_events  = is_page_template( 'page-templates/events.php' ) || is_page( 'events' );
     ?>
 
     <header class="site-header" style="--header-logo-color: <?php echo esc_attr( $header_logo_color ); ?>; --header-link-color: <?php echo esc_attr( $header_link_color ); ?>;">
@@ -36,6 +37,7 @@
                         <li><a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="<?php echo $is_inicio ? 'is-active' : ''; ?>">Inicio</a></li>
                         <li><a href="<?php echo esc_url( home_url( '/our-story/' ) ); ?>" class="<?php echo $is_story ? 'is-active' : ''; ?>">Our Story</a></li>
                         <li><a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="<?php echo $is_contact ? 'is-active' : ''; ?>">Contact</a></li>
+                        <li><a href="<?php echo esc_url( home_url( '/events/' ) ); ?>" class="<?php echo $is_events ? 'is-active' : ''; ?>">Events</a></li>
                     </ul>
                     <?php
                 }

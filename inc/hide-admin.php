@@ -49,6 +49,13 @@ function reset_admin_gate() {
 
 	// /explore → pantalla de login de WordPress.
 	if ( $path === reset_admin_slug() ) {
+		// Con sesión ya iniciada, /explore lleva directo al backoffice (salvo logout, reautenticación, etc.).
+		$busy = array_intersect( [ 'action', 'reauth', 'interim-login', 'loggedout', 'redirect_to' ], array_keys( $_GET ) );
+		if ( $_SERVER['REQUEST_METHOD'] === 'GET' && ! $busy && is_user_logged_in() && current_user_can( 'edit_posts' ) ) {
+			wp_safe_redirect( admin_url() );
+			exit;
+		}
+
 		// wp-login.php se carga desde esta función: sus variables de "ámbito global" deben seguir siéndolo.
 		global $pagenow, $error, $interim_login, $action;
 		$pagenow = 'wp-login.php';
@@ -87,3 +94,11 @@ add_action( 'init', function() {
 		remove_action( 'template_redirect', 'wp_redirect_admin_locations', 1000 );
 	}
 } );
+
+// Tras iniciar sesión, quien puede editar entra siempre al backoffice (nunca a la portada / Coming Soon).
+// Si venía de una pantalla concreta del admin (enlace profundo), se respeta.
+add_filter( 'login_redirect', function( $redirect_to, $requested, $user ) {
+	if ( ! reset_hide_admin_enabled() || ! ( $user instanceof WP_User ) || ! $user->has_cap( 'edit_posts' ) ) return $redirect_to;
+	if ( $requested !== '' && strpos( $requested, admin_url() ) === 0 ) return $redirect_to;
+	return admin_url();
+}, 10, 3 );

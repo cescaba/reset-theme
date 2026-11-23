@@ -6,12 +6,12 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'RESET_CONTENT_GROUPS', [ 'inicio', 'story', 'contact', 'coming', 'global' ] );
+define( 'RESET_CONTENT_GROUPS', [ 'inicio', 'story', 'contact', 'events', 'coming', 'global' ] );
 
 // ── Defaults (valores actuales del theme) ─────────────────────────────────────
 function reset_content_defaults() {
 	$uri = get_template_directory_uri();
-	return [
+	$defaults = [
 		'inicio' => [
 			'hero_title'         => 'Born<br>to<br><i class="font-italic">elevate.</i>',
 			'hero_desc'          => 'Functional Matcha Bar Barcelona.',
@@ -127,6 +127,29 @@ function reset_content_defaults() {
 			'footer_social_url' => 'https://www.instagram.com/resetmatchabar',
 		],
 	];
+
+	// Eventos: copia de Contacto (mismos campos). Solo cambia la cabecera; el resto se edita en el panel.
+	$defaults['events'] = array_merge( $defaults['contact'], [
+		'notify_email'  => '',
+		'find_title'    => 'Your event, your way.',
+		'find_subtitle' => '--- Events at (re)set',
+		'find_desc'     => 'From small private tastings to team gatherings. Write to us with the date and the number of guests and we will take care of the rest.',
+		'info1_title'   => 'Private events',
+		'info1_desc'    => '',
+		'info2_desc'    => '',
+		'info1_text'    => 'Tell us the date, the number of guests and what you have in mind.',
+		'info2_title'   => 'Collaborations',
+		'info2_text'    => 'Brand activations, pop-ups and partnerships. Let\'s build something together.',
+		'hero_pretitle' => '---Events',
+		'hero_title'    => 'Plan your event with us.',
+		'hero_desc'     => 'Private events, tastings and collaborations. Tell us what you have in mind.',
+	] );
+
+	foreach ( [ 'find_label', 'find_items', 'find_link', 'find_url', 'visit_addr1', 'visit_addr2', 'visit_link', 'visit_url', 'hours_1', 'hours_2', 'hours_3', 'email', 'social', 'social_url' ] as $old ) {
+		unset( $defaults['events'][ $old ] );
+	}
+
+	return $defaults;
 }
 
 // ── Helper para plantillas ────────────────────────────────────────────────────
@@ -281,7 +304,7 @@ function reset_menu_link_attrs() {
 
 // ── Esquema de campos (para pintar el admin) ──────────────────────────────────
 function reset_content_schema() {
-	return [
+	$schema = [
 		'inicio' => [
 			'title' => 'Inicio',
 			'desc'  => 'Textos, imágenes y vídeos de la portada (plantilla Inicio + front-page).',
@@ -455,6 +478,43 @@ function reset_content_schema() {
 			],
 		],
 	];
+
+	// Eventos: mismos campos que Contacto, con su propio juego de valores guardados.
+	$schema['events']          = $schema['contact'];
+	$schema['events']['title'] = 'Eventos';
+	$schema['events']['desc']  = 'Contenidos de la página Events (plantilla Events, copia de Contacto).';
+	// La franja de información de Eventos son 2 bloques libres (título + descripción), no los 4 datos fijos de Contacto.
+	$events_sections = [];
+	foreach ( $schema['events']['sections'] as $name => $fields ) {
+		if ( strpos( $name, 'Info' ) === 0 ) {
+			$events_sections['Info (2 bloques libres)'] = [
+				[ 'key' => 'info1_title', 'label' => 'Bloque 1 · Título', 'type' => 'text' ],
+				[ 'key' => 'info1_text', 'label' => 'Bloque 1 · Descripción', 'type' => 'html', 'desc' => 'Texto libre: negrita, cursiva, enlaces y saltos de línea.' ],
+				[ 'key' => 'info1_desc', 'label' => 'Bloque 1 · Texto adicional', 'type' => 'html', 'desc' => 'Opcional. Texto pequeño bajo la descripción, por si hace falta ampliar. Si está vacío no se muestra.' ],
+				[ 'key' => 'info2_title', 'label' => 'Bloque 2 · Título', 'type' => 'text' ],
+				[ 'key' => 'info2_text', 'label' => 'Bloque 2 · Descripción', 'type' => 'html', 'desc' => 'Texto libre: negrita, cursiva, enlaces y saltos de línea.' ],
+				[ 'key' => 'info2_desc', 'label' => 'Bloque 2 · Texto adicional', 'type' => 'html', 'desc' => 'Opcional. Texto pequeño bajo la descripción, por si hace falta ampliar. Si está vacío no se muestra.' ],
+			];
+		} elseif ( strpos( $name, 'How to find' ) === 0 ) {
+			$events_sections['Bloque inferior (título, subtítulo, descripción)'] = [
+				[ 'key' => 'find_title', 'label' => 'Título', 'type' => 'textarea' ],
+				[ 'key' => 'find_subtitle', 'label' => 'Subtítulo', 'type' => 'text' ],
+				[ 'key' => 'find_desc', 'label' => 'Descripción', 'type' => 'html', 'desc' => 'Texto libre: negrita, cursiva, enlaces y saltos de línea.' ],
+				[ 'key' => 'find_img', 'label' => 'Imagen / vídeo', 'type' => 'image' ],
+			];
+		} else {
+			$events_sections[ $name ] = $fields;
+		}
+	}
+	$schema['events']['sections'] = $events_sections;
+	$schema['events']['sections']['Formulario'][] = [
+		'key'   => 'notify_email',
+		'label' => 'Email que recibe los mensajes',
+		'type'  => 'text',
+		'desc'  => 'Cada mensaje del formulario de Eventos se envía a esta dirección (puedes poner varias separadas por coma). Si está vacío, se usa el email del administrador del sitio. Los mensajes también se guardan en (re)set Eventos.',
+	];
+
+	return $schema;
 }
 
 // ── Registro Settings API ─────────────────────────────────────────────────────
@@ -534,6 +594,7 @@ add_action( 'admin_menu', function() {
 		'reset-contenidos'         => [ 'Inicio', 'reset_content_render_inicio' ],
 		'reset-contenidos-story'   => [ 'Our Story', 'reset_content_render_story' ],
 		'reset-contenidos-contact' => [ 'Contacto', 'reset_content_render_contact' ],
+		'reset-contenidos-events'  => [ 'Eventos', 'reset_content_render_events' ],
 		'reset-contenidos-coming'  => [ 'Coming Soon', 'reset_content_render_coming' ],
 		'reset-contenidos-global'  => [ 'Global', 'reset_content_render_global' ],
 	];
@@ -550,6 +611,7 @@ add_action( 'admin_menu', function() {
 function reset_content_render_inicio()  { reset_content_render_page( 'inicio' ); }
 function reset_content_render_story()   { reset_content_render_page( 'story' ); }
 function reset_content_render_contact() { reset_content_render_page( 'contact' ); }
+function reset_content_render_events()  { reset_content_render_page( 'events' ); }
 function reset_content_render_coming()  { reset_content_render_page( 'coming' ); }
 function reset_content_render_global()  { reset_content_render_page( 'global' ); }
 

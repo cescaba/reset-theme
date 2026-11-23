@@ -3,7 +3,7 @@
 // ── Versión del tema ────────────────────────────────────────────────────────
 // Para actualizar: sube la nueva versión aquí Y en style.css, luego
 // actualiza también el archivo update.json en tu servidor.
-define( 'RESET_THEME_VERSION', '1.0.11' );
+define( 'RESET_THEME_VERSION', '1.0.14' );
 define( 'RESET_THEME_DB_VERSION', '2.0.0' );
 
 // URL del JSON de actualizaciones — cámbiala por la tuya antes de desplegar.
@@ -156,8 +156,8 @@ function reset_alter_table() {
 }
 add_action( 'after_setup_theme', 'reset_maybe_update_schema' );
 
-// ── AJAX: guardar registro (público) ────────────────────────────────────────
-function reset_guardar_registro() {
+// ── Antispam común a los formularios públicos (honeypot, token y tiempo mínimo) ─
+function reset_form_guard() {
     check_ajax_referer( 'reset_nonce', 'nonce' );
 
     $website = sanitize_text_field( $_POST['website'] ?? '' );
@@ -180,6 +180,11 @@ function reset_guardar_registro() {
             wp_send_json_error( [ 'msg' => 'Envío demasiado rápido.' ], 403 );
         }
     }
+}
+
+// ── AJAX: guardar registro (público) ────────────────────────────────────────
+function reset_guardar_registro() {
+    reset_form_guard();
 
     // ── Datos ───────────────────────────────────────────────────────────────
     $nombre   = sanitize_text_field( $_POST['nombre'] ?? $_POST['name'] ?? '' );
@@ -251,7 +256,7 @@ function reset_enqueue_scripts() {
         $js_to_enqueue['reset-history'] = 'assets/js/our-history.js';
     }
 
-    if ( is_page_template( 'page-templates/contact.php' ) ) {
+    if ( is_page_template( [ 'page-templates/contact.php', 'page-templates/events.php' ] ) ) {
         $js_to_enqueue['reset-contact'] = 'assets/js/contact.js';
     }
 
@@ -289,6 +294,9 @@ require_once get_template_directory() . '/inc/block-user-enum.php';
 
 // ── Manual de uso (/manual/, solo con sesión) ────────────────────────────────
 require_once get_template_directory() . '/inc/manual.php';
+
+// ── Formulario de Eventos (registro propio + aviso por email) ────────────────
+require_once get_template_directory() . '/inc/events-form.php';
 
 // ── Menú en el backoffice ────────────────────────────────────────────────────
 function reset_admin_menu() {
@@ -335,7 +343,7 @@ function reset_enqueue_page_styles() {
         wp_enqueue_style( 'our-story-style', get_template_directory_uri() . '/assets/css/pages/our-story.css', [], RESET_THEME_VERSION );
     }
 
-    if ( is_page_template( 'page-templates/contact.php' ) ) {
+    if ( is_page_template( [ 'page-templates/contact.php', 'page-templates/events.php' ] ) ) {
         wp_enqueue_style( 'contact-style', get_template_directory_uri() . '/assets/css/pages/contact.css', [], RESET_THEME_VERSION );
     }
 }

@@ -168,9 +168,10 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 8px; }
       <li><span class="n">02</span><a href="#inicio">Inicio</a></li>
       <li><span class="n">03</span><a href="#our-story">Our Story</a></li>
       <li><span class="n">04</span><a href="#contacto">Contacto</a></li>
-      <li><span class="n">05</span><a href="#coming-soon">Coming Soon</a></li>
-      <li><span class="n">06</span><a href="#global">Global (cabecera y pie)</a></li>
-      <li><span class="n">07</span><a href="#avisos">Buenas prácticas y avisos</a></li>
+      <li><span class="n">05</span><a href="#eventos">Eventos</a></li>
+      <li><span class="n">06</span><a href="#coming-soon">Coming Soon</a></li>
+      <li><span class="n">07</span><a href="#global">Global (cabecera y pie)</a></li>
+      <li><span class="n">08</span><a href="#avisos">Buenas prácticas y avisos</a></li>
     </ol>
   </nav>
 
@@ -178,13 +179,13 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 8px; }
     <h2><span class="num">01</span>Antes de empezar</h2>
     <p>Este manual explica cómo cambiar textos, imágenes y vídeos de la web de Reset Matcha Bar. No hace falta saber programar.</p>
     <ul class="sq">
-      <li>Entra en la web con tu usuario en <code>resetmatchabar.com/explore</code>.</li>
-      <li>En el menú de la izquierda, abre <strong>(re)set · Contenidos</strong>. Tiene cinco pantallas: Inicio, Our Story, Contacto, Coming Soon y Global.</li>
+      <li>Entra en la web con tu usuario en <code>resetmatchabar.com/explore</code>. Si ya tienes la sesión iniciada, esa dirección te lleva directamente al panel.</li>
+      <li>En el menú de la izquierda, abre <strong>(re)set · Contenidos</strong>. Tiene seis pantallas: Inicio, Our Story, Contacto, Eventos, Coming Soon y Global. Al final del menú encontrarás también <strong>Tutorial</strong>, que abre este mismo manual dentro del panel.</li>
       <li>Cada pantalla tiene varios bloques. Cambia solo los campos que necesites.</li>
       <li>Pulsa <strong>Guardar cambios</strong> al terminar. Si sales sin guardar, perderás los cambios.</li>
       <li>Después de guardar, abre la web en otra pestaña y revisa el resultado.</li>
     </ul>
-    <p>Los campos <strong>Subir / elegir</strong> abren la biblioteca de Medios. Puedes elegir una imagen o vídeo ya subido, o subir uno nuevo.</p>
+    <p>Los campos <strong>Subir / elegir</strong> abren la biblioteca de Medios. Puedes elegir una imagen o vídeo ya subido, o subir uno nuevo. <strong>Todos los campos de imagen aceptan también vídeo, y los de vídeo aceptan también imagen:</strong> la web muestra el archivo que elijas, sea del tipo que sea. Los vídeos se reproducen solos, sin sonido y en bucle.</p>
     <p>Los campos <strong>Visual</strong> tienen una barra de formato para negrita, cursiva o saltos de línea. Evita la pestaña <strong>Código</strong> salvo que alguien te lo pida.</p>
     <figure>
       <img src="shots/coming-soon.jpg" alt="Panel de WordPress con el menú (re)set · Contenidos desplegado: Inicio, Our Story, Contacto, Coming Soon y Global">
@@ -323,6 +324,7 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 8px; }
       <li><strong>Imagen lateral:</strong> la imagen que acompaña al formulario.</li>
       <li><strong>Título formulario:</strong> el encabezado del formulario.</li>
       <li>Esta pantalla no edita los campos del formulario. Solo cambia su imagen y su título.</li>
+      <li>Los mensajes que llegan por este formulario se guardan en <strong>(re)set Registros</strong>, en el menú de la izquierda. Allí puedes verlos y descargarlos en CSV. Este formulario no envía correo: hay que entrar a revisarlo.</li>
     </ul>
 
     <h3>Cómo llegar</h3>
@@ -334,8 +336,58 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 8px; }
     </ul>
   </section>
 
+  <section id="eventos" class="block" style="--accent: var(--purple)">
+    <h2><span class="num">05</span>Eventos</h2>
+    <p>La página Events se gestiona desde dos pantallas: <strong>(re)set · Contenidos → Eventos</strong>, donde se editan los textos, y <strong>(re)set · Eventos</strong>, donde llegan los mensajes del formulario. Tiene su propio formulario, que no se mezcla con el de Contacto.</p>
+    <div class="note">
+      <strong>Primera vez</strong>
+      <p>La página debe existir en WordPress: en <strong>Páginas → Añadir nueva</strong>, con título “Events”, dirección <code>events</code> y la plantilla <strong>Plantilla Events</strong>. Si ya está creada, no hay que hacer nada más.</p>
+    </div>
+
+    <h3>Cabecera</h3>
+    <ul class="sq">
+      <li><strong>Pretítulo</strong>, <strong>Título</strong> y <strong>Descripción:</strong> los textos de la cabecera.</li>
+      <li><strong>Imagen fondo:</strong> la imagen o vídeo de fondo de la cabecera.</li>
+    </ul>
+
+    <h3>Información (2 bloques libres)</h3>
+    <ul class="sq">
+      <li>Son dos bloques, uno junto al otro. Cada bloque tiene <strong>Título</strong> (la etiqueta gris pequeña), <strong>Descripción</strong> (el texto grande) y <strong>Texto adicional</strong>.</li>
+      <li>El <strong>Texto adicional</strong> es opcional: sale en letra pequeña debajo de la descripción. Si lo dejas vacío, no se muestra.</li>
+      <li>La descripción admite negrita, cursiva, enlaces y saltos de línea. Usa la pestaña Visual.</li>
+      <li>Si vacías un bloque entero, ese bloque desaparece de la web.</li>
+    </ul>
+
+    <h3>Formulario</h3>
+    <ul class="sq">
+      <li><strong>Imagen lateral</strong> y <strong>Título formulario:</strong> la imagen o vídeo que acompaña al formulario y su encabezado.</li>
+      <li><strong>Email que recibe los mensajes:</strong> cada mensaje se envía a esta dirección. Puedes poner varias separadas por coma. Si está vacío, se usa el email del administrador del sitio.</li>
+      <li>El formulario solo tiene nombre, email, asunto y mensaje, sin categorías.</li>
+    </ul>
+
+    <h3>Bloque inferior</h3>
+    <ul class="sq">
+      <li><strong>Título:</strong> el titular grande del bloque verde.</li>
+      <li><strong>Subtítulo:</strong> una línea pequeña debajo del título.</li>
+      <li><strong>Descripción:</strong> un párrafo libre, con barra de formato.</li>
+      <li><strong>Imagen / vídeo:</strong> el archivo que aparece al lado.</li>
+      <li>Si dejas el subtítulo o la descripción vacíos, no se muestran.</li>
+    </ul>
+
+    <h3>Mensajes recibidos</h3>
+    <ul class="sq">
+      <li>Además del correo, cada mensaje se guarda en <strong>(re)set · Eventos</strong>, en el menú de la izquierda. Allí aparece la lista con nombre, email, asunto, mensaje y fecha.</li>
+      <li>Pulsa <strong>Descargar CSV</strong> para guardar la lista, o <strong>Cambiar destinatario</strong> para modificar la dirección que recibe los mensajes.</li>
+    </ul>
+
+    <div class="note">
+      <strong>Antes de publicar</strong>
+      <p>Revisa el email que recibe los mensajes y envía un mensaje de prueba desde la web para comprobar que el aviso llega. El mensaje siempre queda guardado en (re)set · Eventos, aunque el correo falle. Si los avisos no llegan, revisa la carpeta de spam y avisa a VC Studio: puede hacer falta configurar el envío de correo del servidor.</p>
+    </div>
+  </section>
+
   <section id="coming-soon" class="block" style="--accent: var(--yellow)">
-    <h2><span class="num">05</span>Coming Soon</h2>
+    <h2><span class="num">06</span>Coming Soon</h2>
     <p>Esta pantalla edita la página temporal de apertura. Solo se ve en la portada si el modo Coming Soon está activado en la pantalla Global.</p>
     <ul class="sq">
       <li><strong>Eyebrow superior:</strong> el texto pequeño que aparece encima del titular.</li>
@@ -347,7 +399,7 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 8px; }
   </section>
 
   <section id="global" class="block" style="--accent: var(--navy)">
-    <h2><span class="num">06</span>Global (cabecera y pie)</h2>
+    <h2><span class="num">07</span>Global (cabecera y pie)</h2>
     <p>Esta pantalla tiene textos y ajustes comunes a todo el sitio. Cualquier cambio aquí se ve en todas las páginas.</p>
     <figure>
       <img src="shots/global.jpg" alt="Pantalla Global del panel de (re)set con el modo Coming Soon, la carta y el pie de página">
@@ -371,6 +423,12 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 8px; }
       <li>Si el campo queda vacío, el botón lleva a la sección de productos de Inicio.</li>
     </ul>
 
+    <h3>Menú de navegación</h3>
+    <ul class="sq">
+      <li>La cabecera y el pie muestran: Inicio, Our Story, Contact y Events.</li>
+      <li>En pantallas de hasta 1024 px (tabletas y móviles) la cabecera muestra el icono de menú de tres rayas en lugar de los enlaces.</li>
+    </ul>
+
     <h3>Pie de página</h3>
     <ul class="sq">
       <li><strong>Título footer:</strong> el texto principal del pie. Ahora dice “Lets (re)set”.</li>
@@ -381,7 +439,7 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 8px; }
   </section>
 
   <section id="avisos" class="block" style="--accent: var(--pink)">
-    <h2><span class="num">07</span>Buenas prácticas y avisos</h2>
+    <h2><span class="num">08</span>Buenas prácticas y avisos</h2>
 
     <h3>Antes de cambiar algo</h3>
     <ul class="sq">
@@ -399,6 +457,14 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 8px; }
     <ul class="sq">
       <li>Usa archivos en formato web, como JPG, PNG o WebP, y con un tamaño razonable.</li>
       <li>Ponles un nombre claro antes de subirlos, por ejemplo <code>carta-verano-2026.jpg</code>.</li>
+      <li>Para vídeos, usa MP4 o WebM y procura que pesen poco: un vídeo pesado ralentiza la página, sobre todo en el móvil.</li>
+      <li>Puedes poner un vídeo donde había una imagen, y al revés. Comprueba el resultado en el móvil.</li>
+    </ul>
+
+    <h3>Dónde se guardan los mensajes</h3>
+    <ul class="sq">
+      <li><strong>(re)set Registros:</strong> mensajes del formulario de Contacto y correos de la página Coming Soon.</li>
+      <li><strong>(re)set Eventos:</strong> mensajes del formulario de Eventos, que además llegan por correo a la dirección configurada.</li>
     </ul>
 
     <h3>Revisión después de guardar</h3>

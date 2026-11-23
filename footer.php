@@ -9,6 +9,7 @@
             <a href="<?php echo esc_url( home_url( '/' ) ); ?>">Inicio</a>
             <a href="<?php echo esc_url( home_url( '/our-story' ) ); ?>">Our story</a>
             <a href="<?php echo esc_url( home_url( '/contact' ) ); ?>">Contact</a>
+            <a href="<?php echo esc_url( home_url( '/events' ) ); ?>">Events</a>
         </nav>
     </div>
 </footer>
