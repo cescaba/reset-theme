@@ -33,10 +33,10 @@ $grid_items  = function_exists( 'reset_get_grid_products' ) ? reset_get_grid_pro
 
     <div class="info-images-block">
         <div class="info-image-item">
-            <img src="<?php echo esc_url( reset_content( 'inicio', 'info_img1' ) ); ?>" alt="Matcha preparation">
+            <?php echo reset_media_html( reset_content( 'inicio', 'info_img1' ), 'Matcha preparation' ); ?>
         </div>
         <div class="info-image-item">
-            <img src="<?php echo esc_url( reset_content( 'inicio', 'info_img2' ) ); ?>" alt="Matcha cup (re)set">
+            <?php echo reset_media_html( reset_content( 'inicio', 'info_img2' ), 'Matcha cup (re)set' ); ?>
         </div>
     </div>
 </section>
@@ -88,7 +88,7 @@ $grid_items  = function_exists( 'reset_get_grid_products' ) ? reset_get_grid_pro
                 <div class="product-card">
                     <div class="product-img">
                         <?php if ( $p_image ) : ?>
-                        <img src="<?php echo esc_url( $p_image ); ?>" alt="<?php echo esc_attr( $p_name ); ?>">
+                        <?php echo reset_media_html( $p_image, $p_name ); ?>
                         <?php endif; ?>
                     </div>
                     <h4 class="font-diatype-bold"><?php echo esc_html( $p_name ); ?></h4>
@@ -105,7 +105,7 @@ $grid_items  = function_exists( 'reset_get_grid_products' ) ? reset_get_grid_pro
             <div class="space-image-wrapper">
                 <a href="<?php echo esc_url( reset_content( 'inicio', 'space_map_url' ) ); ?>" class="view-map-link font-mono"><?php echo esc_html( reset_content( 'inicio', 'space_map_text' ) ); ?></a>
 
-                <img src="<?php echo esc_url( reset_content( 'inicio', 'space_img' ) ); ?>" alt="Our space in Barcelona">
+                <?php echo reset_media_html( reset_content( 'inicio', 'space_img' ), 'Our space in Barcelona' ); ?>
             </div>
 
             <div class="space-info-card">
@@ -130,11 +130,11 @@ $grid_items  = function_exists( 'reset_get_grid_products' ) ? reset_get_grid_pro
         </div>
 
         <div class="rhythm-item rhythm-image rhythm-img-lifestyle">
-            <img src="<?php echo esc_url( reset_content( 'inicio', 'rhythm_img1' ) ); ?>" alt="Enjoying Reset Matcha">
+            <?php echo reset_media_html( reset_content( 'inicio', 'rhythm_img1' ), 'Enjoying Reset Matcha' ); ?>
         </div>
 
         <div class="rhythm-item rhythm-image rhythm-img-cheers">
-            <img src="<?php echo esc_url( reset_content( 'inicio', 'rhythm_img2' ) ); ?>" alt="Sharing Reset Matcha">
+            <?php echo reset_media_html( reset_content( 'inicio', 'rhythm_img2' ), 'Sharing Reset Matcha' ); ?>
         </div>
     </div>
 </section>

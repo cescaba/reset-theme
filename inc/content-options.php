@@ -606,10 +606,10 @@ function reset_content_render_page( $group ) {
 										<label>Imagen</label>
 										<div class="reset-media-row">
 											<input type="url" name="<?php echo $name; ?>[<?php echo (int) $i; ?>][image]" value="<?php echo esc_attr( $it['image'] ?? '' ); ?>" placeholder="https://…" class="regular-text reset-media-url">
-											<button type="button" class="button reset-media-btn" data-type="image">Subir / elegir</button>
+											<button type="button" class="button reset-media-btn" data-type="media">Subir / elegir</button>
 										</div>
 										<?php if ( ! empty( $it['image'] ) ) : ?>
-											<img src="<?php echo esc_url( $it['image'] ); ?>" class="reset-preview" alt="">
+											<?php if ( reset_media_is_video( $it['image'] ) ) : ?><video src="<?php echo esc_url( $it['image'] ); ?>" class="reset-preview" muted playsinline></video><?php else : ?><img src="<?php echo esc_url( $it['image'] ); ?>" class="reset-preview" alt=""><?php endif; ?>
 										<?php endif; ?>
 									</div>
 									<?php endforeach; ?>
@@ -640,10 +640,10 @@ function reset_content_render_page( $group ) {
 										<label>Icono</label>
 										<div class="reset-media-row">
 											<input type="url" name="<?php echo $name; ?>[<?php echo (int) $i; ?>][icon]" value="<?php echo esc_attr( $it['icon'] ?? '' ); ?>" placeholder="https://…" class="regular-text reset-media-url">
-											<button type="button" class="button reset-media-btn" data-type="image">Subir / elegir</button>
+											<button type="button" class="button reset-media-btn" data-type="media">Subir / elegir</button>
 										</div>
 										<?php if ( ! empty( $it['icon'] ) ) : ?>
-											<img src="<?php echo esc_url( $it['icon'] ); ?>" class="reset-preview reset-preview-icon" alt="">
+											<?php if ( reset_media_is_video( $it['icon'] ) ) : ?><video src="<?php echo esc_url( $it['icon'] ); ?>" class="reset-preview reset-preview-icon" muted playsinline></video><?php else : ?><img src="<?php echo esc_url( $it['icon'] ); ?>" class="reset-preview reset-preview-icon" alt=""><?php endif; ?>
 										<?php endif; ?>
 									</div>
 									<?php endforeach; ?>
@@ -676,15 +676,15 @@ function reset_content_render_page( $group ) {
 							<?php elseif ( $is_media ) : ?>
 								<div class="reset-media-row">
 									<input type="url" name="<?php echo $name; ?>" value="<?php echo esc_attr( $val ); ?>" placeholder="https://…" class="regular-text reset-media-url">
-									<button type="button" class="button reset-media-btn" data-type="<?php echo esc_attr( $f['type'] ); ?>">Subir / elegir</button>
+									<button type="button" class="button reset-media-btn" data-type="<?php echo $f['type'] === 'file' ? 'file' : 'media'; ?>">Subir / elegir</button>
 								</div>
 								<?php if ( $val ) : ?>
-									<?php if ( $f['type'] === 'image' || ( $f['type'] === 'file' && preg_match( '/\.(jpe?g|png|gif|webp|avif)$/i', (string) wp_parse_url( $val, PHP_URL_PATH ) ) ) ) : ?>
-										<img src="<?php echo esc_url( $val ); ?>" class="reset-preview" alt="">
-									<?php elseif ( $f['type'] === 'file' ) : ?>
-										<p class="description"><a href="<?php echo esc_url( $val ); ?>" target="_blank" rel="noopener"><?php echo esc_html( wp_basename( (string) wp_parse_url( $val, PHP_URL_PATH ) ) ); ?></a></p>
-									<?php else : ?>
+									<?php if ( reset_media_is_video( $val ) ) : ?>
 										<video src="<?php echo esc_url( $val ); ?>" class="reset-preview" muted playsinline></video>
+									<?php elseif ( $f['type'] !== 'file' || preg_match( '/\.(jpe?g|png|gif|webp|avif)$/i', (string) wp_parse_url( $val, PHP_URL_PATH ) ) ) : ?>
+										<img src="<?php echo esc_url( $val ); ?>" class="reset-preview" alt="">
+									<?php else : ?>
+										<p class="description"><a href="<?php echo esc_url( $val ); ?>" target="_blank" rel="noopener"><?php echo esc_html( wp_basename( (string) wp_parse_url( $val, PHP_URL_PATH ) ) ); ?></a></p>
 									<?php endif; ?>
 								<?php endif; ?>
 							<?php elseif ( $f['type'] === 'toggle' ) : ?>

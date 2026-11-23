@@ -15,6 +15,7 @@
 }
 
 .hero-bg img, 
+.hero-bg video,
 .hero-video {
     width: 100%;
     height: 100%;
@@ -269,7 +270,8 @@
         overflow: hidden;
     }
 
-    .hero-case-3 .hero-bg img {
+    .hero-case-3 .hero-bg img,
+    .hero-case-3 .hero-bg video {
         width: 100%;
         height: 100%;
         object-fit: cover;

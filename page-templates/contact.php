@@ -57,7 +57,7 @@
 <section class="contact-form-section">
     <div class="contact-form-grid">
         <div class="contact-form-image">
-            <img src="<?php echo esc_url( reset_content( 'contact', 'form_img' ) ); ?>" alt="Matcha preparation">
+            <?php echo reset_media_html( reset_content( 'contact', 'form_img' ), 'Matcha preparation' ); ?>
         </div>
 
         <div class="contact-form-content">
@@ -128,7 +128,7 @@
         </div>
 
         <div class="find-us-image">
-            <img src="<?php echo esc_url( reset_content( 'contact', 'find_img' ) ); ?>" alt="Reset Matcha Cans">
+            <?php echo reset_media_html( reset_content( 'contact', 'find_img' ), 'Reset Matcha Cans' ); ?>
         </div>
     </div>
 </section>

@@ -352,14 +352,8 @@
       </div>
     </div>
     <div class="a-right">
-      <video autoplay muted loop playsinline class="a-right-video-desktop">
-        <source src="<?php echo esc_url( reset_content( 'coming', 'video_desktop' ) ); ?>" type="video/mp4">
-        Tu navegador no soporta videos.
-      </video>
-      <video autoplay muted loop playsinline class="a-right-video-mobile">
-        <source src="<?php echo esc_url( reset_content( 'coming', 'video_mobile' ) ); ?>" type="video/mp4">
-        Tu navegador no soporta videos.
-      </video>
+      <?php echo reset_media_html( reset_content( 'coming', 'video_desktop' ), '', 'a-right-video-desktop' ); ?>
+      <?php echo reset_media_html( reset_content( 'coming', 'video_mobile' ), '', 'a-right-video-mobile' ); ?>
       <div class="a-info">
         <div class="a-location"><?php echo esc_html( reset_content( 'coming', 'location' ) ); ?></div>
         <div class="a-address"><?php echo nl2br( esc_html( reset_content( 'coming', 'address' ) ) ); ?></div>

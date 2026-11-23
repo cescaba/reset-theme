@@ -18,25 +18,18 @@ $footer_text = $args['footer_text'] ?? '';
     
     <div class="hero-bg">
         <?php if ( $case == 1 ) : ?>
-            <video autoplay muted loop playsinline class="hero-video hero-video-desktop">
-                <source src="<?php echo esc_url($video_url); ?>" type="video/mp4">
-                Tu navegador no soporta videos.
-            </video>
-
-            <video autoplay muted loop playsinline class="hero-video hero-video-mobile">
-                <source src="<?php echo esc_url($video_url_mobile); ?>" type="video/mp4">
-                Tu navegador no soporta videos.
-            </video>
+            <?php echo reset_media_html( $video_url, '', 'hero-video hero-video-desktop' ); ?>
+            <?php echo reset_media_html( $video_url_mobile, '', 'hero-video hero-video-mobile' ); ?>
 
             <div class="hero-overlay"></div> 
 
         <?php elseif ( $case == 2 ) : ?>
             <div class="hero-overlay"></div> 
-            <img src="<?php echo esc_url($bg_url); ?>" alt="<?php echo esc_attr(strip_tags($title)); ?>">
+            <?php echo reset_media_html( $bg_url, strip_tags( $title ) ); ?>
             
         <?php elseif ( $case == 3 ) : ?>
             <div class="split-image-wrapper">
-                <img src="<?php echo esc_url($bg_url); ?>" alt="<?php echo esc_attr(strip_tags($title)); ?>">
+                <?php echo reset_media_html( $bg_url, strip_tags( $title ) ); ?>
             </div>
         <?php endif; ?>
     </div>

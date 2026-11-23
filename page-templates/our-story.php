@@ -33,7 +33,7 @@ $beliefs = function_exists( 'reset_get_beliefs' ) ? reset_get_beliefs( 'story', 
 <section class="story-way-section">
     <div class="story-way-grid">
         <div class="way-image">
-            <img src="<?php echo esc_url( reset_content( 'story', 'way_img' ) ); ?>" alt="A way to keep going">
+            <?php echo reset_media_html( reset_content( 'story', 'way_img' ), 'A way to keep going' ); ?>
         </div>
 
         <div class="way-content-block">
@@ -50,7 +50,7 @@ $beliefs = function_exists( 'reset_get_beliefs' ) ? reset_get_beliefs( 'story', 
 </section>
 <section class="purpose-section">
     <div class="purpose-bg-overlay">
-        <img src="<?php echo esc_url( reset_content( 'story', 'purpose_bg' ) ); ?>" alt="Background shadows">
+        <?php echo reset_media_html( reset_content( 'story', 'purpose_bg' ), 'Background shadows' ); ?>
     </div>
 
     <div class="purpose-container">
@@ -88,7 +88,7 @@ $beliefs = function_exists( 'reset_get_beliefs' ) ? reset_get_beliefs( 'story', 
             <div class="belief-item">
                 <?php if ( $b_icon ) : ?>
                 <div class="belief-icon">
-                    <img src="<?php echo esc_url( $b_icon ); ?>" alt="<?php echo esc_attr( $b_title ); ?>">
+                    <?php echo reset_media_html( $b_icon, $b_title ); ?>
                 </div>
                 <?php endif; ?>
                 <h3 class="font-serif"><?php echo esc_html( $b_title ); ?></h3>
@@ -102,7 +102,7 @@ $beliefs = function_exists( 'reset_get_beliefs' ) ? reset_get_beliefs( 'story', 
 <section class="story-dual-section">
     <div class="dual-block">
         <div class="dual-bg">
-            <img src="<?php echo esc_url( reset_content( 'story', 'comm_bg' ) ); ?>" alt="Our community">
+            <?php echo reset_media_html( reset_content( 'story', 'comm_bg' ), 'Our community' ); ?>
             <div class="dual-overlay"></div>
         </div>
         <div class="dual-content">
@@ -115,7 +115,7 @@ $beliefs = function_exists( 'reset_get_beliefs' ) ? reset_get_beliefs( 'story', 
 
     <div class="dual-block">
         <div class="dual-bg">
-            <img src="<?php echo esc_url( reset_content( 'story', 'space_bg' ) ); ?>" alt="Our space">
+            <?php echo reset_media_html( reset_content( 'story', 'space_bg' ), 'Our space' ); ?>
             <div class="dual-overlay"></div>
         </div>
         <div class="dual-content">
@@ -126,7 +126,9 @@ $beliefs = function_exists( 'reset_get_beliefs' ) ? reset_get_beliefs( 'story', 
         </div>
     </div>
 </section>
-<section class="promise-section" style="--bg-mobile: url('<?php echo esc_url( reset_content( 'story', 'promise_bg_mobile' ) ); ?>');">
+<?php $promise_bg = reset_content( 'story', 'promise_bg_mobile' ); $promise_bg_video = reset_media_is_video( $promise_bg ); ?>
+<section class="promise-section"<?php if ( ! $promise_bg_video ) : ?> style="--bg-mobile: url('<?php echo esc_url( $promise_bg ); ?>');"<?php endif; ?>>
+    <?php if ( $promise_bg_video ) echo reset_media_html( $promise_bg, '', 'promise-bg-video' ); ?>
     <div class="promise-container">
         <span class="promise-label font-mono"><?php echo esc_html( reset_content( 'story', 'promise_label' ) ); ?></span>
         <h2 class="font-serif">

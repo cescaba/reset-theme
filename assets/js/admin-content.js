@@ -3,19 +3,19 @@ jQuery(function($){
     e.preventDefault();
     var btn = $(this), row = btn.closest('.reset-media-row'), input = row.find('.reset-media-url');
     var kind = btn.data('type');
-    var isVideo = kind === 'video';
-    var libType = isVideo ? 'video' : (kind === 'file' ? ['application/pdf', 'image'] : 'image');
+    var libType = kind === 'file' ? ['application/pdf', 'image'] : ['image', 'video'];
     var frame = wp.media({ title:'Elegir archivo', multiple:false, library:{ type: libType } });
     frame.on('select',function(){
       var att = frame.state().get('selection').first().toJSON();
       input.val(att.url).trigger('change');
+      if (kind === 'file') return;
       var wrap = btn.closest('.reset-product-row, .reset-field');
-      var prev = wrap.find('.reset-preview');
-      if (prev.length) {
-        if (prev.is('img')) prev.attr('src', att.url);
-      } else if (kind === 'image') {
-        $('<img class="reset-preview" alt="">').attr('src', att.url).insertAfter(row);
-      }
+      var cls = wrap.find('.reset-preview').first().hasClass('reset-preview-icon') ? 'reset-preview reset-preview-icon' : 'reset-preview';
+      wrap.find('.reset-preview').remove();
+      var prev = att.type === 'video'
+        ? $('<video muted playsinline></video>')
+        : $('<img alt="">');
+      prev.addClass(cls).attr('src', att.url).insertAfter(row);
     });
     frame.open();
   });
@@ -45,7 +45,7 @@ jQuery(function($){
       + '<div class="reset-product-top"><strong>Producto ' + (idx + 1) + '</strong> <button type="button" class="button reset-product-remove">Quitar</button></div>'
       + '<label>Nombre</label><input type="text" name="' + base + '[' + idx + '][name]" value="" class="regular-text" placeholder="Reset Matcha">'
       + '<label>Descripción</label><input type="text" name="' + base + '[' + idx + '][desc]" value="" class="regular-text" placeholder="Matcha latte frío con…">'
-      + '<label>Imagen</label><div class="reset-media-row"><input type="url" name="' + base + '[' + idx + '][image]" value="" placeholder="https://…" class="regular-text reset-media-url"> <button type="button" class="button reset-media-btn" data-type="image">Subir / elegir</button></div>'
+      + '<label>Imagen</label><div class="reset-media-row"><input type="url" name="' + base + '[' + idx + '][image]" value="" placeholder="https://…" class="regular-text reset-media-url"> <button type="button" class="button reset-media-btn" data-type="media">Subir / elegir</button></div>'
       + '</div>');
     list.append(row);
   });
@@ -72,7 +72,7 @@ jQuery(function($){
       + '<div class="reset-product-top"><strong>Creencia ' + (idx + 1) + '</strong> <button type="button" class="button reset-belief-remove">Quitar</button></div>'
       + '<label>Título</label><input type="text" name="' + base + '[' + idx + '][title]" value="" class="regular-text" placeholder="CLEAN ENERGY">'
       + '<label>Descripción</label><textarea name="' + base + '[' + idx + '][desc]" rows="2" placeholder="Energy, without the chaos"></textarea>'
-      + '<label>Icono</label><div class="reset-media-row"><input type="url" name="' + base + '[' + idx + '][icon]" value="" placeholder="https://…" class="regular-text reset-media-url"> <button type="button" class="button reset-media-btn" data-type="image">Subir / elegir</button></div>'
+      + '<label>Icono</label><div class="reset-media-row"><input type="url" name="' + base + '[' + idx + '][icon]" value="" placeholder="https://…" class="regular-text reset-media-url"> <button type="button" class="button reset-media-btn" data-type="media">Subir / elegir</button></div>'
       + '</div>');
     list.append(row);
   });
